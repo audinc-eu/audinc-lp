@@ -1,0 +1,34 @@
+# Na elke push naar main: controleren en daarna audinc.nl opnieuw laten bouwen.
+# De build van audinc.nl haalt dan de nieuwste versie van deze repo op; na
+# ongeveer 6 tot 20 minuten staat de wijziging op audinc.nl/lp/.
+name: Live zetten op audinc.nl
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: live
+  cancel-in-progress: true
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Controleren
+        run: node scripts/controleer.mjs
+      - name: audinc.nl opnieuw bouwen
+        env:
+          CF_DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$CF_DEPLOY_HOOK" ]; then
+            echo "::warning::CF_DEPLOY_HOOK ontbreekt; de wijziging gaat mee met de eerstvolgende build van audinc.nl."
+            exit 0
+          fi
+          curl -fsS -X POST "$CF_DEPLOY_HOOK" > /dev/null
+          echo "Build van audinc.nl gestart."

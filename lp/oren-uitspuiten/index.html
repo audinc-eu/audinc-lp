@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Consent Mode v2 + GTM-KVKKTQK, zelfde volgorde als BaseLayout.astro -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+    });
+    gtag('set', 'url_passthrough', true);
+    try {
+        var lees = function (n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : null; };
+        var keuze = null, eigen = lees('audinc_consent');
+        if (eigen) { var c = JSON.parse(eigen); if (c && c.v === 1) keuze = c; }
+        if (!keuze) {
+            var cy = lees('cookieyes-consent');
+            if (cy) {
+                var v = {};
+                cy.split(',').forEach(function (d) { var kv = d.split(':'); v[(kv[0] || '').trim()] = (kv[1] || '').trim(); });
+                if (v.action === 'yes') keuze = { analytics: v.analytics === 'yes', marketing: v.advertisement === 'yes' };
+            }
+        }
+        if (keuze) {
+            var ads = keuze.marketing ? 'granted' : 'denied';
+            gtag('consent', 'update', { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: keuze.analytics ? 'granted' : 'denied' });
+        }
+    } catch (e) {}
+    </script>
+    <script>
+    // GTM alleen op de echte domeinen. Op een preview of lokaal alleen met
+    // ?gtm_debug (Tag Assistant) of ?lp_gtm=1, anders telt een testboeking als
+    // echte conversie in Google Ads.
+    (function (w, d, s, l, i) {
+        var h = location.hostname.replace(/^www\./, '');
+        var echt = /^audinc\.(nl|be|eu|de|cy|lt)$/.test(h);
+        if (!echt && !/[?&](gtm_debug|lp_gtm)=/.test(location.search)) return;
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KVKKTQK');
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Oren Uitspuiten vs Uitzuigen: De Vergelijking | Audinc</title>
+    <meta name="description" content="Oren uitspuiten vs uitzuigen, punt voor punt vergeleken: druppelen vooraf, hard oorsmeer, aantal afspraken, risico's en kosten. Zo kies je de juiste methode.">
+    <link rel="icon" href="/audinc/gedeeld/favicon.ico" type="image/x-icon">
+
+
+
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #f26722;
+            --orange-dark: #d4551a;
+            --orange-light: #fff3ec;
+            --green: #10bf0c;
+            --green-dark: #0ea00b;
+            --dark: #1a1a2e;
+            --text: #333;
+            --text-light: #666;
+            --bg-light: #f8f8f8;
+            --white: #fff;
+            --radius: 12px;
+            --shadow: 0 2px 16px rgba(0,0,0,.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============ NAV ============ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--dark);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            padding: 12px 0;
+            transition: box-shadow .3s;
+        }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-phone {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,.8);
+            text-decoration: none;
+        }
+        .nav-phone:hover { color: var(--orange); }
+
+        /* ============ BUTTONS ============ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+            padding: 14px 32px;
+            font-size: 17px;
+        }
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16,191,12,.3);
+        }
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+        .btn-nav {
+            background: var(--green);
+            color: var(--white);
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+        .btn-nav:hover {
+            background: var(--green-dark);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #fff 0%, var(--orange-light) 100%);
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--white);
+            border: 1px solid rgba(242,103,34,.15);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        .hero h1 span { color: var(--orange); }
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .hero-bullets li {
+            font-size: 16px;
+            color: var(--text);
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .hero-bullets li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            background: var(--green);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-size: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .hero-review {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .hero-stars { color: #f5a623; font-size: 16px; }
+        .hero-google-logo { width: 16px; height: 16px; vertical-align: middle; }
+
+        /* Hero Right - Visual Card */
+        .hero-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,.06);
+        }
+        .hero-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        .hero-card-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+        }
+        .hero-card-step:last-child { border-bottom: none; }
+        .hero-card-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .hero-card-step h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+        .hero-card-step p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .hero-subhead {
+            font-size: 17px;
+            line-height: 1.5;
+            color: var(--text);
+            margin-bottom: 24px;
+            max-width: 520px;
+        }
+
+        /* Hero ticks (inline trust pills) */
+        .hero-ticks {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin: 16px 0 0;
+            padding: 0;
+        }
+        .hero-ticks li {
+            font-size: 14px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hero-ticks li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            background: var(--green);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-size: 11px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Hero Right - Visual (foto) */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 360px;
+            background: radial-gradient(circle at 50% 50%, var(--orange-light) 0%, transparent 70%);
+        }
+        .hero-visual img {
+            max-width: 100%;
+            max-height: 360px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 24px 40px rgba(242,103,34,.2);
+        }
+
+        /* ============ TRUST BAR ============ */
+        .trust-bar {
+            background: var(--dark);
+            padding: 20px 0;
+        }
+        .trust-bar .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .trust-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* ============ SECTIONS ============ */
+        section { padding: 72px 0; }
+        section.alt { background: var(--bg-light); }
+
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--orange);
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        /* ============ PROBLEM / COMPARISON ============ */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .problem-card {
+            border-radius: var(--radius);
+            padding: 32px;
+        }
+        .problem-card.bad {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+        .problem-card.good {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        .problem-card.bad h3 span { color: #dc2626; }
+        .problem-card.good h3 span { color: #16a34a; }
+        .problem-card ul { list-style: none; }
+        .problem-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .problem-card li span {
+            flex-shrink: 0;
+            font-weight: 600;
+            margin-top: 1px;
+        }
+        .problem-card.bad li span { color: #dc2626; }
+        .problem-card.good li span { color: #16a34a; }
+        .cta-row {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .cta-row .hero-review { display: block; }
+
+        /* ============ USP GRID ============ */
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .usp-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,.04);
+        }
+        .usp-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        .usp-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .usp-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* ============ STEPS ============ */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: calc(16.66% + 24px);
+            right: calc(16.66% + 24px);
+            height: 2px;
+            background: var(--orange);
+            opacity: .2;
+        }
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+        .step-num {
+            width: 48px;
+            height: 48px;
+            background: var(--orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            margin: 0 auto 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .step-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .step-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        /* ============ TESTIMONIALS ============ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            position: relative;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,.04);
+        }
+        .testimonial-card .source-corner {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 22px;
+            height: 22px;
+        }
+        .testimonial-stars {
+            color: #f5a623;
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-right: 32px;
+        }
+        .testimonial-card blockquote {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .testimonial-author .verified-check {
+            width: 14px;
+            height: 14px;
+            color: #1a73e8;
+            flex-shrink: 0;
+        }
+        .testimonial-meta {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .reviews-header-proof {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 8px 14px;
+            background: var(--white);
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,.06);
+            font-size: 14px;
+            color: var(--text);
+        }
+        .reviews-header-proof svg.g-logo { width: 18px; height: 18px; }
+        .reviews-header-proof .rh-stars { color: #f5a623; letter-spacing: 1px; }
+        .reviews-header-proof strong { font-weight: 600; color: var(--dark); }
+        .reviews-header-subtext {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        /* ============ ABOUT ============ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .about-photo {
+            display: flex;
+            justify-content: center;
+        }
+        .about-photo img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: block;
+        }
+        .about-copy .section-label { margin-bottom: 12px; }
+        .about-copy .section-title { text-align: left; margin-bottom: 16px; }
+        .about-copy p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        .about-copy p:last-child { margin-bottom: 0; font-style: italic; color: var(--text-light); }
+        @media (max-width: 720px) {
+            .about-grid { grid-template-columns: 1fr; gap: 24px; }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ============ FAQ ============ */
+        .faq-list { max-width: 720px; margin: 0 auto; }
+        .faq-item {
+            border-bottom: 1px solid rgba(0,0,0,.08);
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            cursor: pointer;
+            text-align: left;
+            gap: 16px;
+        }
+        .faq-question:hover { color: var(--orange); }
+        .faq-chevron {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: transform .2s;
+        }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 0 20px;
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ============ CLOSING ============ */
+        .closing {
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+            text-align: center;
+            padding: 72px 0;
+        }
+        .closing .section-title { color: var(--white); }
+        .closing .section-subtitle { color: rgba(255,255,255,.7); }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--dark);
+            padding: 24px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+        .footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,.4);
+        }
+        .footer a {
+            color: rgba(255,255,255,.5);
+            text-decoration: none;
+        }
+        .footer a:hover { color: var(--orange); }
+
+        /* ============ MODAL ============ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-overlay.visible { opacity: 1; }
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            width: 90vw;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 48px rgba(0,0,0,.2);
+            transform: translateY(20px);
+            transition: transform .3s;
+        }
+        .modal-overlay.visible .modal { transform: translateY(0); }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(0,0,0,.08);
+        }
+        .modal-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .modal-header h3 span {
+            font-weight: 400;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--bg-light);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: all .2s;
+        }
+        .modal-close:hover {
+            background: #eee;
+            color: var(--dark);
+        }
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+            min-height: 500px;
+            position: relative;
+        }
+        .modal-trust {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(0,0,0,.08);
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .modal-trust span { display: flex; align-items: center; gap: 4px; }
+
+        .embed-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .embed-loading.hidden { display: none; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .hero .container { grid-template-columns: 1fr; gap: 20px; }
+            .hero h1 { font-size: 28px; }
+            .hero { padding: 84px 0 32px; }
+            .hero-subhead { font-size: 15px; margin-bottom: 18px; }
+            .hero-ticks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-top: 14px; }
+            .hero-ticks li { font-size: 13px; }
+
+            .hero-visual { order: -1; min-height: 180px; margin: 0 auto; max-width: 340px; }
+            .hero-visual img { max-height: 200px; }
+
+            .section-title { font-size: 26px; }
+
+            .problem-grid { grid-template-columns: 1fr; }
+
+            .usp-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+            .usp-card { padding: 20px 16px; }
+
+            .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+            .steps-grid::before { display: none; }
+
+            .testimonials-grid { grid-template-columns: 1fr; }
+
+            .nav-phone { display: none; }
+
+            .trust-bar .container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px 20px;
+                justify-items: start;
+            }
+            .trust-item { font-size: 12px; }
+
+            .modal {
+                width: 100vw;
+                height: 100vh;
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .usp-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .usp-card { padding: 18px 12px; }
+            .usp-card h3 { font-size: 14px; }
+            .usp-card p { font-size: 12px; }
+            .trust-bar .container { gap: 12px 16px; }
+        }
+
+    
+        /* ============ NAV MENU (added) ============ */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-menu a {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,.85);
+            text-decoration: none;
+            transition: color .2s;
+            padding: 6px 0;
+        }
+        .nav-menu a:hover { color: var(--orange); }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--white);
+        }
+        .nav-toggle svg { width: 24px; height: 24px; }
+        section[id] { scroll-margin-top: 72px; }
+
+        /* ============ FOOTER (added) ============ */
+        .footer {
+            background: var(--bg-light, #f8f8f8);
+            border-top: 1px solid rgba(0,0,0,.06);
+            padding: 36px 0 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 28px;
+        }
+        .footer-col h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        .footer-col p,
+        .footer-col address {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-style: normal;
+            margin: 0;
+        }
+        .footer-col a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .footer-col a:hover { color: var(--orange); }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li { padding: 4px 0; }
+        .footer-links a { font-size: 14px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(0,0,0,.08);
+            padding: 16px 0;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ============ NAV/FOOTER mobile (added) ============ */
+        @media (max-width: 900px) {
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--dark);
+                padding: 16px 24px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+                box-shadow: 0 8px 24px rgba(0,0,0,.3);
+                transform: translateY(-110%);
+                visibility: hidden;
+                transition: transform .3s ease, visibility 0s linear .3s;
+                z-index: 99;
+            }
+            .nav-menu.open { transform: translateY(0); visibility: visible; transition: transform .3s ease, visibility 0s linear 0s; }
+            .nav-menu li { width: 100%; }
+            .nav-menu a {
+                display: block;
+                padding: 12px 0;
+                font-size: 16px;
+                border-bottom: 1px solid rgba(255,255,255,.06);
+            }
+            .nav-menu li:last-child a { border-bottom: none; }
+            .nav-toggle { display: block; }
+        }
+        @media (max-width: 720px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+        /* safe-area-fix */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            body { padding-top: env(safe-area-inset-top); }
+            .nav { padding-top: calc(12px + env(safe-area-inset-top)); }
+            .footer-bottom { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+            @media (max-width: 900px) {
+                .nav-menu { top: calc(60px + env(safe-area-inset-top)); }
+            }
+        }
+
+        /* ============ VERDICT (korte versie) ============ */
+        .verdict-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .verdict-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,.08);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+        .verdict-card.highlight {
+            border-color: rgba(242,103,34,.35);
+            box-shadow: var(--shadow);
+        }
+        .verdict-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--white);
+            background: var(--orange);
+            border-radius: 100px;
+            padding: 5px 14px;
+            margin-bottom: 14px;
+        }
+        .verdict-tag.neutral {
+            background: var(--bg-light);
+            color: var(--text-light);
+        }
+        .verdict-card p {
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--text);
+        }
+        .verdict-note {
+            margin-top: 12px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* ============ VERGELIJKINGSTABEL ============ */
+        .cmp-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--radius);
+            border: 1px solid rgba(0,0,0,.08);
+            background: var(--white);
+        }
+        .cmp-table {
+            width: 100%;
+            min-width: 720px;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .cmp-table thead th {
+            text-align: left;
+            padding: 18px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+            border-bottom: 2px solid rgba(0,0,0,.08);
+            vertical-align: bottom;
+        }
+        .cmp-table thead th span {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        .cmp-table thead .cmp-col-a { background: #fef6f6; }
+        .cmp-table thead .cmp-col-b { background: #f2fbf4; }
+        .cmp-table tbody th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark);
+            width: 24%;
+            padding: 16px 20px;
+            vertical-align: top;
+            background: var(--bg-light);
+        }
+        .cmp-table tbody td {
+            padding: 16px 20px;
+            vertical-align: top;
+            color: var(--text);
+            line-height: 1.55;
+            width: 38%;
+        }
+        .cmp-table tbody tr + tr th,
+        .cmp-table tbody tr + tr td {
+            border-top: 1px solid rgba(0,0,0,.07);
+        }
+        .cmp-table tbody td:nth-of-type(1) { background: #fffafa; }
+        .cmp-table tbody td:nth-of-type(2) { background: #f7fdf8; }
+        .cmp-table tbody td.win::before {
+            content: '\2713';
+            color: #16a34a;
+            font-weight: 700;
+            margin-right: 7px;
+        }
+        .cmp-table tbody td strong { color: var(--dark); }
+        /* Kolomlabels: alleen zichtbaar in de gestapelde mobiele weergave. */
+        .cmp-lbl { display: none; }
+
+        /* ============ RISICO'S ============ */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .risk-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,.06);
+            border-left: 3px solid var(--orange);
+            border-radius: var(--radius);
+            padding: 26px 24px;
+            box-shadow: var(--shadow);
+        }
+        .risk-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .risk-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        /* ============ SECUNDAIRE CTA ============ */
+        .cta-secondary {
+            margin-top: 16px;
+            font-size: 15px;
+        }
+        .cta-secondary a {
+            color: var(--orange);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .cta-secondary a:hover { color: var(--orange-dark); }
+
+        /* ============ EERLIJKE NOOT ============ */
+        section.honest { padding: 48px 0; }
+        .honest-band {
+            max-width: 760px;
+            margin: 0 auto;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,.08);
+            border-radius: var(--radius);
+            padding: 28px 30px;
+        }
+        .honest-band h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+        .honest-band ul { list-style: none; margin: 0; padding: 0; }
+        .honest-band li {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-light);
+            padding: 7px 0 7px 22px;
+            position: relative;
+        }
+        .honest-band li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--orange);
+        }
+        .honest-band strong { color: var(--dark); font-weight: 600; }
+
+        /* ============ MOBIEL ============ */
+        @media (max-width: 768px) {
+            .verdict-grid { grid-template-columns: 1fr; }
+            .risk-grid { grid-template-columns: 1fr; }
+            .honest-band { padding: 22px 20px; }
+
+            /* De tabel wordt op mobiel een reeks kaarten: één kaart per
+               vergelijkingspunt, met beide methodes onder elkaar en een eigen
+               kolomlabel. Geen horizontaal scrollen dus. */
+            .cmp-wrap {
+                overflow: visible;
+                border: none;
+                background: none;
+                border-radius: 0;
+            }
+            .cmp-table { display: block; min-width: 0; width: 100%; font-size: 14px; }
+            .cmp-table thead { display: none; }
+            .cmp-table tbody { display: block; }
+            .cmp-table tbody tr {
+                display: block;
+                background: var(--white);
+                border: 1px solid rgba(0,0,0,.1);
+                border-radius: var(--radius);
+                overflow: hidden;
+                margin-bottom: 14px;
+                box-shadow: var(--shadow);
+            }
+            .cmp-table tbody tr:last-child { margin-bottom: 0; }
+            .cmp-table tbody th {
+                display: block;
+                width: auto;
+                background: var(--dark);
+                color: var(--white);
+                font-size: 15px;
+                font-weight: 700;
+                padding: 13px 18px;
+                line-height: 1.35;
+            }
+            .cmp-table tbody td {
+                display: block;
+                width: auto;
+                padding: 14px 18px;
+                line-height: 1.5;
+            }
+            .cmp-table tbody tr + tr th,
+            .cmp-table tbody tr + tr td { border-top: none; }
+            .cmp-table tbody td:nth-of-type(1) { background: #fff7f7; }
+            .cmp-table tbody td.win,
+            .cmp-table tbody td:nth-of-type(2) {
+                background: #f5fcf7;
+                border-top: 1px solid rgba(0,0,0,.08);
+            }
+            .cmp-table tbody td.win::before { content: none; }
+            .cmp-lbl {
+                display: block;
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1.2px;
+                margin-bottom: 5px;
+            }
+            .cmp-lbl.bad { color: #c2410c; }
+            .cmp-lbl.good { color: #15803d; }
+        }
+</style>
+    <link rel="stylesheet" href="/audinc/booking.css">
+    <script>window.AUDINC_BOOKING={"defaultServiceId":14,"paid":true,"prepayNote":"Je rekent nu €25 onderzoekskosten online af, met iDEAL, creditcard of Apple Pay. Het uitzuigen kost €27,50 per behandeld oor en betaal je op locatie. Wordt er geen oorsmeer gevonden, dan betaal je alleen de onderzoekskosten. Kosteloos annuleren of verzetten kan tot 24 uur vooraf.","title":null,"backend":"audinc-site"};</script>
+</head>
+<body>
+
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+    <div class="container">
+        <a href="#top" class="nav-logo">
+            <img src="/audinc/gedeeld/logo-white.svg" alt="Audinc" style="height:36px;">
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#vergelijking">Vergelijking</a></li>
+            <li><a href="#risico">Risico's</a></li>
+            <li><a href="#uitzuigen">Uitzuigen</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="btn btn-nav" onclick="openModal()">Maak afspraak</button>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" id="navToggleIcon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Oren uitspuiten vs uitzuigen. <span>De vergelijking.</span></h1>
+            <p class="hero-subhead">Uitspuiten betekent eerst een week druppelen, dan een afspraak, en dan maar afwachten of het water erdoor komt. Uitzuigen haalt het oorsmeer droog weg onder een 3D-microscoop, in één afspraak. Hieronder staan de elf verschillen naast elkaar.</p>
+            <button class="btn btn-primary" onclick="openModal()">Plan een afspraak voor uitzuigen</button>
+            <ul class="hero-ticks">
+                <li>Geen verwijzing nodig</li>
+                <li>Vaak deze week terecht</li>
+                <li>Ook bij hard oorsmeer</li>
+                <li>Klaar in 20 tot 30 minuten</li>
+            
+                <li>&euro;25 onderzoek, &euro;27,50 per oor</li></ul>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+        <div class="hero-visual">
+            <picture>
+                <source media="(min-width: 960px)" srcset="/audinc/gedeeld/oren-uitzuigen-1280.webp">
+                <source media="(min-width: 640px)" srcset="/audinc/gedeeld/oren-uitzuigen-960.webp">
+                <img src="/audinc/gedeeld/oren-uitzuigen-640.webp" alt="Specialist van Audinc verwijdert oorsmeer door droog uitzuigen onder een 3D-microscoop, het alternatief voor oren uitspuiten" width="1280" height="960" loading="eager" fetchpriority="high">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust-bar">
+    <div class="container">
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            95.000+ klanten
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            4,7/5 uit 317 reviews
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            12 locaties in Nederland
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Onder toezicht KNO-arts
+        </div>
+    </div>
+</div>
+
+<!-- ============ KORTE VERSIE ============ -->
+<section>
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">De korte versie</div>
+            <h2 class="section-title">Waarom uitspuiten zo vaak een tweede ronde wordt</h2>
+            <p class="section-subtitle">Water spoelt oorsmeer los. Dat lukt als het zacht is. Zit het hard of al maanden vast, dan komt er niets doorheen en sta je een week later opnieuw bij de balie.</p>
+        </div>
+        <div class="verdict-grid">
+            <div class="verdict-card">
+                <div class="verdict-tag neutral">Uitspuiten</div>
+                <p>Je druppelt eerst 3 tot 5 dagen om het oorsmeer week te maken. Dan volgt de afspraak. De gehoorgang staat vol water, dus er is nauwelijks zicht op wat er gebeurt. Lukt het niet, dan opnieuw druppelen of alsnog een doorverwijzing.</p>
+                <p class="verdict-note">Meerdere stappen, en geen garantie dat je er vanaf bent.</p>
+            </div>
+            <div class="verdict-card highlight">
+                <div class="verdict-tag">Uitzuigen</div>
+                <p>Je komt zoals je bent, zonder voorbereiding. De specialist kijkt met een 3D-microscoop in je gehoorgang, maakt hard oorsmeer los en zuigt het droog weg. Jij kijkt live mee op het scherm en krijgt de beelden mee.</p>
+                <p class="verdict-note">Eén afspraak van 20 tot 30 minuten, en je hoort het verschil.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ VERGELIJKINGSTABEL ============ -->
+<section class="alt" id="vergelijking">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Uitspuiten vs uitzuigen</div>
+            <h2 class="section-title">Punt voor punt naast elkaar</h2>
+            <p class="section-subtitle">Elf verschillen die bepalen welke methode voor jou de juiste is.</p>
+        </div>
+
+        <div class="cmp-wrap">
+            <table class="cmp-table">
+                <thead>
+                    <tr>
+                        <th class="cmp-row-label"></th>
+                        <th class="cmp-col-a">Uitspuiten<span>huisarts of zelf</span></th>
+                        <th class="cmp-col-b">Uitzuigen<span>bij Audinc</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Hoe het werkt</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Water onder druk spoelt het oorsmeer los en naar buiten.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Een fijn zuigbuisje haalt het oorsmeer droog weg, als een ministofzuiger.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Zicht tijdens de behandeling</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Beperkt. Zodra de gehoorgang vol water staat, spoel je grotendeels op gevoel.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Live beeld via een 3D-microscoop, op een scherm waar jij op meekijkt.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Vooraf druppelen</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Meestal 3 tot 5 dagen olie of oordruppels nodig om het oorsmeer week te maken.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Niet nodig. Je kunt komen zoals je bent.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Hard, ingedroogd oorsmeer</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Weekt vaak niet genoeg los. Dan volgt een tweede spoeling of alsnog een doorverwijzing.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Wordt eerst losgemaakt met een klein instrumentje en daarna weggezogen.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Hoe snel je terecht kunt</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Afspraak bij de huisarts, plus de dagen druppelen die daaraan voorafgaan.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Online plannen, vaak nog deze week terecht.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Aantal afspraken</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Eén als het meezit. Bij hard oorsmeer vaker, of alsnog door naar de KNO-arts.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Eén, van 20 tot 30 minuten. Ook als uitspuiten eerder niet werkte.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Wat het kost</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Bij de huisarts niets, dat valt buiten je eigen risico. Bij de KNO-arts in het ziekenhuis gaat het wel van je eigen risico af.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>&euro;25 onderzoekskosten reken je online af bij het boeken, daarna &euro;27,50 per behandeld oor op locatie. Voor twee oren &euro;80, aftrekbaar als medische kosten. Geen oorsmeer gevonden, dan betaal je alleen de onderzoekskosten.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Buisjes, perforatie of ooroperatie gehad</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Mag niet. Dit geldt als contra-indicatie, want water kan het middenoor in.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Kan wel. Er komt geen water en geen druk in je oor.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Risico</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Sluit de straal de gehoorgang af, dan loopt de druk op. Dat kan de gehoorgang beschadigen, een ontsteking geven en in zeldzame gevallen het trommelvlies beschadigen.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Geen water, geen drukopbouw, en de specialist ziet continu wat er gebeurt.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Verwijzing nodig</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Niet bij de huisarts. Wel als je naar de KNO-arts moet.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Nee, je plant zelf online.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Bewijs achteraf</th>
+                        <td><span class="cmp-lbl bad">Uitspuiten</span>Je ziet niet wat eruit is gekomen.</td>
+                        <td class="win"><span class="cmp-lbl good">Uitzuigen bij Audinc</span>Je krijgt een video van voor en na mee naar huis.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cta-row">
+            <button class="btn btn-primary" onclick="openModal()">Plan een afspraak voor uitzuigen</button>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ RISICO'S ============ -->
+<section id="risico">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Waar het misgaat</div>
+            <h2 class="section-title">Waarom uitspuiten soms niet mag of niet werkt</h2>
+            <p class="section-subtitle">Drie situaties waarin water in je gehoorgang het probleem groter maakt in plaats van kleiner.</p>
+        </div>
+        <div class="risk-grid">
+            <div class="risk-card">
+                <h3>De druk kan nergens heen</h3>
+                <p>Sluit het spuitje de ingang van je gehoorgang af, dan kan het water er wel in maar niet uit. De druk loopt dan op tegen je trommelvlies aan. Dat is precies de reden waarom de meeste complicaties bij uitspuiten ontstaan.</p>
+            </div>
+            <div class="risk-card">
+                <h3>Bij buisjes en perforaties mag het niet</h3>
+                <p>Heb je trommelvliesbuisjes, een perforatie, een trommelvliesplastiek of een operatie aan je middenoor gehad? Dan is uitspuiten een contra-indicatie. Water en oorsmeer kunnen dan het middenoor in en een ontsteking veroorzaken. Reinigen met een wattendrager of uitzuigapparaat is dan het advies.</p>
+            </div>
+            <div class="risk-card">
+                <h3>Nat oorsmeer zet uit</h3>
+                <p>Oorsmeer neemt water op en wordt daar dikker van. Lukt de spoeling niet in één keer, dan zit je oor vaak tijdelijk verder dicht dan ervoor. Dat is het moment waarop mensen alsnog bij ons komen.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ EERLIJKE NOOT ============ -->
+<section class="alt honest" id="wanneer-huisarts">
+    <div class="container">
+        <div class="honest-band">
+            <h2>Wanneer je gewoon naar de huisarts moet</h2>
+            <ul>
+                <li><strong>Er is meer aan de hand dan oorsmeer.</strong> Bij oorpijn, koorts, vocht uit je oor of plotseling gehoorverlies hoor je eerst bij je huisarts, niet bij ons.</li>
+                <li><strong>Je oorsmeer is zacht en zit er nog niet lang.</strong> Dan spoelt water het er meestal gewoon uit en is er geen reden om iets anders te proberen.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ============ HOE UITZUIGEN WERKT ============ -->
+<section id="uitzuigen">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Het alternatief</div>
+            <h2 class="section-title">Zo werkt uitzuigen bij Audinc</h2>
+            <p class="section-subtitle">Dezelfde methode als de KNO-arts gebruikt, alleen zonder ziekenhuis, zonder verwijzing en zonder wachtlijst.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <h3>Plan online een afspraak</h3>
+                <p>Kies een locatie en een tijd die jou uitkomt. 12 vestigingen, van Groningen tot Maastricht.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <h3>Uitzuigen onder de 3D-microscoop</h3>
+                <p>De specialist bekijkt je gehoorgang en zuigt het oorsmeer droog weg. Jij kijkt live mee op het scherm.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <h3>Direct verschil hoorbaar</h3>
+                <p>Na 20 tot 30 minuten loop je naar buiten met een helder gehoor, plus je voor- en na-video.</p>
+            </div>
+        </div>
+        <div class="cta-row">
+            <button class="btn btn-primary" onclick="openModal()">Plan een afspraak voor uitzuigen</button>
+            <p class="cta-secondary"><a href="/lp/oorsmeer-uitzuigen/">Lees alles over oorsmeer uitzuigen</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="alt" id="reviews">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Reviews</div>
+            <h2 class="section-title">Wat klanten zeggen</h2>
+            <div class="reviews-header-proof">
+                <svg class="g-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <strong>4,7</strong>
+                <span class="rh-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span>uit 64</span>
+            </div>
+            <div class="reviews-header-subtext">Op basis van 317 reviews</div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Geen wachttijd, vriendelijk geholpen en mijn gehoor was meteen beter. Fijn dat dit gewoon buiten het ziekenhuis kan, scheelt enorm veel tijd. Ik kom zeker terug als het nodig is.&rdquo;</blockquote>
+                <div class="testimonial-author">Anja <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">21 november 2025 &middot; Beoordeling van Oren uitzuigen</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Professioneel en duidelijk. De specialist liet eerst een video van mijn oor zien en daarna het resultaat. Echt bizar hoeveel verschil het maakt. Je merkt meteen dat ze met moderne apparatuur werken.&rdquo;</blockquote>
+                <div class="testimonial-author">Tom <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">21 november 2025 &middot; Beoordeling van Oren uitzuigen</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Super service! Ik had al weken last van een verstopt oor en werd bij Audinc binnen 30 minuten geholpen. De behandeling was volledig pijnloos en ik hoorde direct weer scherp. Absoluut een aanrader!&rdquo;</blockquote>
+                <div class="testimonial-author">Marieke <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">21 november 2025 &middot; Beoordeling van Oren uitzuigen</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Veelgestelde vragen</div>
+            <h2 class="section-title">Over oren uitspuiten</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Wat is het verschil tussen oren uitspuiten en uitzuigen?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Bij uitspuiten wordt water onder druk in je gehoorgang gespoten om het oorsmeer los te weken en naar buiten te spoelen. Bij uitzuigen wordt het oorsmeer droog weggezogen met een medische zuigpomp, onder zicht van een 3D-microscoop. Uitspuiten is de klassieke methode van de huisarts, uitzuigen is wat de KNO-arts gebruikt.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Uitspuiten heeft bij mij niet gewerkt. Wat nu?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Dat gebeurt vooral bij hard, ingedroogd oorsmeer dat er al langer zit. Water komt er dan niet doorheen. Uitzuigen werkt in die situatie wel, omdat de specialist de prop onder de microscoop eerst losmaakt en daarna wegzuigt. Je hoeft daarvoor niet eerst terug naar de huisarts en je hebt geen verwijzing nodig.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Doet oren uitspuiten pijn?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Normaal gesproken niet, maar je voelt wel water en druk. Veel mensen vinden het onaangenaam en sommigen worden er even duizelig van, omdat het water je evenwichtsorgaan prikkelt als het niet lichaamswarm is. Doet het pijn, dan moet er direct gestopt worden. Bij uitzuigen komt er geen water en geen druk aan te pas, dus dat effect heb je daar niet.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Moet ik vooraf druppelen?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Voor uitspuiten meestal wel: 3 tot 5 dagen olie of oordruppels om het oorsmeer week te maken, anders komt het niet los. Voor uitzuigen is dat niet nodig. De zuigtechniek werkt ook op hard en vastzittend oorsmeer, dus je kunt komen zonder voorbereiding.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Wanneer mag ik mijn oren niet laten uitspuiten?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Bij trommelvliesbuisjes, een (vermoedelijke) perforatie, een trommelvliesplastiek of na een operatie aan je middenoor. Water kan dan het middenoor in en een ontsteking veroorzaken. In die gevallen is reinigen met een wattendrager of uitzuigen het advies. Ook bij een lopend oor, oorpijn of koorts is spoelen niet het eerste wat je wilt doen.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Kan ik zelf mijn oren uitspuiten?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Er zijn setjes met een ballonspuit te koop, maar je hebt geen zicht in je eigen gehoorgang. Je weet dus niet of er echt een prop zit, of je trommelvlies gaaf is en hoeveel druk je geeft. De twee dingen die het vaakst misgaan: te hard spuiten, en de prop dieper duwen in plaats van eruit. Wat wel veilig is, is een paar dagen druppelen om het oorsmeer zachter te maken.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Wat kost oorsmeer uitzuigen bij Audinc?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">80 euro voor beide oren, inclusief inspectie met de 3D-microscoop en de voor- en na-video's. De behandeling wordt niet vergoed door de zorgverzekering, maar geldt wel als medische kosten die je mogelijk kunt aftrekken bij de inkomstenbelasting. Bekijk de actuele prijs per locatie tijdens het maken van je afspraak.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Waar kan ik terecht voor uitzuigen?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Op 12 locaties door heel Nederland: Amsterdam Rokin (Rokin 92-96), Amsterdam Sloterdijk (Kingsfordweg 151), Apeldoorn (Het Rietveld 55A), Den Bosch (Stationsplein 91), Den Haag (Zuid Hollandlaan 7), Eindhoven (Hastelweg 260-D), Groningen (Paterswoldseweg 806), Maastricht (Stationsplein 8K), Nijmegen (Jonkerbosplein 52), Rotterdam (Fascinatio Boulevard 216), Utrecht (Newtonlaan 115) en Zwolle (Grote Voort 293A). Nadat je op de knop klikt zie je alle beschikbare tijden per locatie.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="closing">
+    <div class="container">
+        <h2 class="section-title">Klaar met spoelen en druppelen?</h2>
+        <p class="section-subtitle">Laat je oorsmeer droog uitzuigen onder een 3D-microscoop. Geen water, geen druk, en in één afspraak klaar. Geen verwijzing nodig, op 12 locaties door heel Nederland.</p>
+        <button class="btn btn-primary" onclick="openModal()" style="font-size: 18px; padding: 16px 40px;">Plan een afspraak voor uitzuigen</button>
+        <p class="prijs-noot" style="max-width:640px;margin:18px auto 0;font-size:14px;line-height:1.55;color:#64748b;">Je rekent &euro;25 onderzoekskosten online af bij het boeken. Het uitzuigen kost &euro;27,50 per behandeld oor en betaal je op locatie, dus voor twee oren kom je op &euro;80. Wordt er geen oorsmeer gevonden, dan betaal je alleen de onderzoekskosten. Kosteloos annuleren of verzetten kan tot 24 uur vooraf.</p>
+        <div style="margin-top: 16px;"><div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div></div>
+    </div>
+</section>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Adres</h4>
+                <address>
+                    Audinc<br>
+                    Hastelweg 260 D<br>
+                    5652CN Eindhoven<br>
+                    Nederland
+                </address>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>
+                    <a href="mailto:info@audinc.nl">info@audinc.nl</a><br>
+                    <a href="tel:0850600012">085-0600012</a><br>
+                    <span style="opacity:.7;">Ma t/m vr 09:00 &ndash; 17:00</span>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Klantenservice</h4>
+                <ul class="footer-links">
+                    <li><a href="https://audinc.nl/contact/">Contact</a></li>
+                    <li><a href="https://audinc.nl/support/">Support</a></li>
+                    <li><a href="https://audinc.nl/levertijd/">Levertijden</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Audinc &mdash; Oordoppen &amp; gehoorbescherming op maat. Alle rechten voorbehouden.</p>
+        </div>
+    </div>
+<p class="lp-legal" style="margin:16px 0 0;font-size:13px;opacity:.75;text-align:center"><a href="https://audinc.nl/privacyverklaring/" style="color:inherit">Privacyverklaring</a> &middot; <a href="#" data-consent-open style="color:inherit">Cookievoorkeuren</a></p>
+</footer>
+
+<script>
+// ============ TRACKING: Capture URL params ============
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const trackingKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const tracked = {};
+    trackingKeys.forEach(function(key) {
+        const val = params.get(key);
+        if (val) {
+            tracked[key] = val;
+            try { sessionStorage.setItem(key, val); } catch(e) {}
+        } else {
+            try {
+                const stored = sessionStorage.getItem(key);
+                if (stored) tracked[key] = stored;
+            } catch(e) {}
+        }
+    });
+    window.__lpTracking = tracked;
+})();
+
+// ============ NAV SCROLL ============
+window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// ============ FAQ TOGGLE ============
+function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var answer = item.querySelector('.faq-answer');
+    var isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+}
+
+
+// ============ MOBILE MENU TOGGLE (added) ============
+(function() {
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('navMenu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', function() {
+        var isOpen = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            menu.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
+
+// ============ HASH ANCHOR SCROLL (added) ============
+// Server injects <base href="/audinc/<page>/"> so relative URLs resolve against
+// that base. For in-page anchor clicks we preventDefault + manual scroll, then
+// write the hash onto the CURRENT path (window.location.pathname) so the clean
+// custom-domain path (e.g. /festival) is preserved instead of being reset to /.
+(function() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var hash = this.getAttribute('href');
+            if (!hash || hash === '#') return;
+            var target = document.getElementById(hash.slice(1));
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (history.replaceState) {
+                history.replaceState(null, '', window.location.pathname + hash);
+            }
+        });
+    });
+})();
+</script>
+
+<script src="/audinc/booking.js" defer></script>
+<script src="/audinc/lp-consent.js" defer></script>
+</body>
+</html>

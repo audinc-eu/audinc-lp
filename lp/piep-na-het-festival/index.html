@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Consent Mode v2 + GTM-KVKKTQK, zelfde volgorde als BaseLayout.astro -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+    });
+    gtag('set', 'url_passthrough', true);
+    try {
+        var lees = function (n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : null; };
+        var keuze = null, eigen = lees('audinc_consent');
+        if (eigen) { var c = JSON.parse(eigen); if (c && c.v === 1) keuze = c; }
+        if (!keuze) {
+            var cy = lees('cookieyes-consent');
+            if (cy) {
+                var v = {};
+                cy.split(',').forEach(function (d) { var kv = d.split(':'); v[(kv[0] || '').trim()] = (kv[1] || '').trim(); });
+                if (v.action === 'yes') keuze = { analytics: v.analytics === 'yes', marketing: v.advertisement === 'yes' };
+            }
+        }
+        if (keuze) {
+            var ads = keuze.marketing ? 'granted' : 'denied';
+            gtag('consent', 'update', { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: keuze.analytics ? 'granted' : 'denied' });
+        }
+    } catch (e) {}
+    </script>
+    <script>
+    // GTM alleen op de echte domeinen. Op een preview of lokaal alleen met
+    // ?gtm_debug (Tag Assistant) of ?lp_gtm=1, anders telt een testboeking als
+    // echte conversie in Google Ads.
+    (function (w, d, s, l, i) {
+        var h = location.hostname.replace(/^www\./, '');
+        var echt = /^audinc\.(nl|be|eu|de|cy|lt)$/.test(h);
+        if (!echt && !/[?&](gtm_debug|lp_gtm)=/.test(location.search)) return;
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KVKKTQK');
+    </script>
+
+    <meta name="robots" content="noindex, nofollow">
+    <title>5 redenen waarom die piep na het festival serieuzer is dan je denkt</title>
+    <meta name="description" content="Een festivaldag duurt acht tot twaalf uur en vlak bij het podium loopt het geluid op tot 103 decibel. Wat die piep achteraf betekent, en waarom de gratis schuimdopjes het niet oplossen.">
+    <link rel="icon" href="/audinc/gedeeld/favicon.ico" type="image/x-icon">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #f26722;
+            --orange-dark: #d4551a;
+            --orange-light: #fff3ec;
+            --green: #10bf0c;
+            --green-dark: #0ea00b;
+            --dark: #1a1a2e;
+            --text: #333;
+            --text-light: #666;
+            --bg-light: #fff;
+            --line: #ececec;
+            --serif: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            --white: #fff;
+            --radius: 12px;
+            --shadow: 0 2px 16px rgba(0,0,0,.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.65;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 84px;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* ============ TOPBAR (geen navigatie, bewust) ============ */
+        .adv-topbar {
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 14px 0;
+        }
+        .adv-topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .adv-topbar img { height: 30px; width: auto; }
+        /* ============ DEEL A: HET ARTIKEL ============ */
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 32px 24px 8px;
+        }
+
+        /* Hero boven de kop, zoals bij VitalPaws: eerst het beeld, dan de belofte. */
+        .art-hero {
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .art-hero img { width: 100%; max-height: 360px; object-fit: cover; }
+        @media (max-width: 640px) { .art-hero img { max-height: 240px; } }
+
+        /* Kop, kicker, deck en byline staan gecentreerd. De lopende tekst
+           daaronder blijft links uitgelijnd, anders leest de kolom niet. */
+        .art-head { text-align: center; margin-bottom: 40px; }
+        .art-kicker {
+            display: inline-block;
+            background: var(--orange-light);
+            color: var(--orange-dark);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+        .article h1 {
+            font-family: var(--serif);
+            font-size: clamp(32px, 5.6vw, 52px);
+            line-height: 1.14;
+            font-weight: 400;
+            color: #000;
+            letter-spacing: -.6px;
+            margin-bottom: 18px;
+        }
+        .art-deck {
+            font-size: 19px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 26px;
+        }
+        .byline {
+            display: inline-block;
+            padding: 14px 0 0;
+            border-top: 1px solid var(--line);
+            margin-bottom: 34px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .reason { margin-bottom: 44px; }
+        .reason img { border-radius: var(--radius); margin-bottom: 20px; }
+        /* Staand beeld mag de kolom niet vullen, anders duwt het de tekst weg. */
+        .reason .portrait { max-width: min(400px, 100%); margin-left: auto; margin-right: auto; }
+        .reason figure { margin: 22px 0 0; }
+        .reason figure img { margin-bottom: 8px; margin-left: auto; margin-right: auto; }
+        .reason figcaption {
+            font-size: 13.5px;
+            color: var(--text-light);
+            text-align: center;
+        }
+        .reason h2 {
+            font-family: var(--serif);
+            font-size: clamp(23px, 3.7vw, 31px);
+            line-height: 1.22;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 12px;
+            letter-spacing: -.4px;
+        }
+        .reason h2 span { color: var(--orange); }
+        .reason p { margin-bottom: 14px; font-size: 17px; }
+        .reason p:last-child { margin-bottom: 0; }
+        .reason strong { color: var(--dark); font-weight: 600; }
+
+        .pull {
+            border-left: 3px solid var(--orange);
+            background: var(--orange-light);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 16px;
+            margin: 18px 0;
+        }
+
+        .inline-cta {
+            display: block;
+            text-align: center;
+            margin: 34px 0;
+        }
+        .inline-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green-dark);
+            font-weight: 700;
+            font-size: 17px;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(16,191,12,.35);
+            padding-bottom: 3px;
+        }
+        .inline-cta a:hover { border-bottom-color: var(--green); }
+
+        /* ============ MARQUEE ============ */
+        .marquee {
+            background: var(--dark);
+            color: #fff;
+            overflow: hidden;
+            padding: 14px 0;
+            margin-top: 20px;
+        }
+        .marquee-track {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            animation: scrollx 34s linear infinite;
+        }
+        .marquee-track span {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: .9;
+        }
+        .marquee-track span::before { content: '\2713'; color: var(--green); margin-right: 8px; font-weight: 700; }
+        @keyframes scrollx { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+        /* ============ DEEL B: HET BOEKINGSBLOK ============ */
+        .offer { background: #fff; padding: 48px 0 56px; }
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+        @media (min-width: 900px) {
+            .offer-grid { grid-template-columns: 1fr 1fr; gap: 44px; }
+            .offer-media { position: sticky; top: 24px; }
+        }
+
+        .gallery-main { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #fff; }
+        .gallery-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+        .gallery-thumbs button {
+            padding: 0; border: 2px solid transparent; background: none; cursor: pointer;
+            border-radius: 8px; overflow: hidden; line-height: 0;
+        }
+        .gallery-thumbs button.active { border-color: var(--orange); }
+        /* De vier beelden hebben verschillende verhoudingen. Vast kader plus
+           contain, anders springt de sticky kolom bij elke thumbnailwissel. */
+        .gallery-main img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #fff; }
+        .gallery-thumbs button img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
+
+        .offer-eyebrow { font-size: 13px; font-weight: 700; color: var(--orange-dark); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+        .offer h2 { font-size: clamp(25px, 4.2vw, 33px); line-height: 1.22; color: var(--dark); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+        .offer-rating { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-light); margin-bottom: 14px; }
+        .offer-rating a { color: var(--text-light); text-decoration: underline; }
+        .stars { color: #f5a623; letter-spacing: 1px; }
+        .offer-lead { font-size: 17px; margin-bottom: 20px; }
+
+        .spec-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 22px; }
+        .spec {
+            background: #fff; border: 1px solid #eee; border-radius: 10px;
+            padding: 12px 14px; font-size: 14px; font-weight: 500; color: var(--dark);
+        }
+        .spec small { display: block; font-weight: 400; color: var(--text-light); font-size: 12.5px; }
+
+        .statcard {
+            background: #fff; border: 1px solid #e4f3e3; border-left: 4px solid var(--green);
+            border-radius: 10px; padding: 16px 18px; margin-bottom: 22px;
+        }
+        .statcard b { font-size: 17px; color: var(--dark); }
+        .statcard small { display: block; color: var(--text-light); font-size: 12.5px; margin-top: 6px; }
+
+        .price-card {
+            background: #fff; border: 2px solid var(--green); border-radius: var(--radius);
+            padding: 20px; margin-bottom: 16px;
+        }
+        .price-card h3 { font-size: 18px; color: var(--dark); margin-bottom: 6px; }
+        .price-incl { list-style: none; margin: 12px 0 0; }
+        .price-incl li { font-size: 15px; padding-left: 26px; position: relative; margin-bottom: 7px; }
+        .price-incl li::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: inherit; font-weight: 700; border: none; border-radius: 10px;
+            cursor: pointer; text-decoration: none; transition: all .2s; white-space: nowrap;
+        }
+        .btn-primary { background: var(--green); color: var(--white); padding: 16px 32px; font-size: 17px; width: 100%; }
+        .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(16,191,12,.3); }
+        .guarantee { text-align: center; font-size: 13.5px; color: var(--text-light); margin-top: 10px; }
+        .guarantee b { color: var(--dark); }
+
+        .availability { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 16px 18px; margin-top: 18px; }
+        .availability h4 { font-size: 14px; color: var(--dark); margin-bottom: 10px; }
+        .availability ul { list-style: none; font-size: 14px; }
+        .availability li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #eee; }
+        .availability li:last-child { border-bottom: none; }
+        .availability .tag { font-weight: 600; font-size: 12.5px; }
+        .tag-free { color: var(--green-dark); }
+        .tag-busy { color: var(--orange-dark); }
+
+        /* ============ ACCORDION ============ */
+        .acc { margin-top: 24px; border-top: 1px solid #e6e6e6; }
+        .acc-item { border-bottom: 1px solid #e6e6e6; }
+        .acc-q {
+            width: 100%; background: none; border: none; cursor: pointer; font-family: inherit;
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            padding: 16px 0; text-align: left; font-size: 16px; font-weight: 600; color: var(--dark);
+        }
+        .acc-q::after { content: '+'; font-size: 22px; color: var(--orange); flex-shrink: 0; line-height: 1; }
+        .acc-item.open .acc-q::after { content: '\2013'; }
+        .acc-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+        .acc-a > div { padding: 0 0 16px; font-size: 15.5px; color: var(--text-light); }
+        .acc-a table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+        .acc-a td { padding: 8px 0; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+        .acc-a td:first-child { font-weight: 600; color: var(--dark); width: 34%; }
+
+        /* ============ REVIEWS ============ */
+        .reviews { padding: 52px 0; background: #fff; border-top: 1px solid var(--line); }
+        .sec-head { text-align: center; max-width: 620px; margin: 0 auto 32px; }
+        .sec-head h2 { font-size: clamp(24px, 4vw, 32px); color: var(--dark); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+        .sec-head p { color: var(--text-light); }
+        .review-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 820px) { .review-grid { grid-template-columns: repeat(3, 1fr); } }
+        .reviews-proof {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 15px; color: var(--text-light); margin-bottom: 8px;
+        }
+        .reviews-proof strong { color: var(--dark); font-size: 17px; }
+        .g-logo { width: 20px; height: 20px; }
+        .verified-check { width: 14px; height: 14px; color: var(--green); vertical-align: -2px; }
+        .review-meta { font-size: 12.5px; color: var(--text-light); margin-top: 4px; }
+        .review { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+        .review p { font-size: 15.5px; margin: 8px 0 12px; }
+        .review-name { font-size: 13.5px; color: var(--dark); font-weight: 600; }
+
+        /* ============ FAQ ============ */
+        .faq-sec { padding: 52px 0 60px; background: #fff; border-top: 1px solid var(--line); }
+        .faq-wrap { max-width: 760px; margin: 0 auto; }
+
+        /* ============ STICKY BAR ============ */
+        .sticky {
+            position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+            background: #fff; border-top: 1px solid rgba(26,26,46,.12);
+            box-shadow: 0 -4px 18px rgba(0,0,0,.08);
+            transform: translateY(100%); opacity: 0; visibility: hidden;
+            transition: transform .45s ease, opacity .35s ease;
+        }
+        .sticky.active { transform: translateY(0); opacity: 1; visibility: visible; }
+        .sticky .container { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 12px; padding-bottom: 12px; }
+        .sticky-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+        .sticky-info img { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+        .sticky-info b { display: block; font-size: 15px; color: var(--dark); line-height: 1.25; }
+        .sticky-info span { font-size: 12.5px; color: var(--text-light); }
+        .sticky .btn-primary { width: auto; padding: 13px 26px; font-size: 15.5px; }
+        @media (max-width: 560px) {
+            .sticky-info img { display: none; }
+            .sticky-info b { font-size: 14px; }
+            .sticky .btn-primary { padding: 12px 18px; font-size: 14.5px; }
+            .sticky .container { padding-left: 16px; padding-right: 16px; }
+        }
+
+        /* ============ FOOTER ============ */
+        .footer { background: var(--dark); color: rgba(255,255,255,.75); padding: 40px 0 28px; font-size: 14px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 720px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+        .footer h4 { color: #fff; font-size: 15px; margin-bottom: 10px; }
+        .footer a { color: rgba(255,255,255,.75); text-decoration: none; }
+        .footer a:hover { color: var(--orange); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 6px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 26px; padding-top: 18px; font-size: 12.5px; opacity: .7; }
+        .footer address { font-style: normal; }
+    </style>
+    <link rel="stylesheet" href="/audinc/booking.css">
+    <script>window.AUDINC_BOOKING={"defaultServiceId":4,"paid":false,"prepayNote":null,"title":null,"backend":"audinc-site"};</script>
+</head>
+<body>
+
+<!-- ============================================================
+     TOPBAR. Bewust zonder navigatiemenu: elke link naar elders is
+     een ontsnappingsroute. Alleen het logo, als masthead.
+     ============================================================ -->
+<div class="adv-topbar">
+    <div class="container">
+        <img src="/audinc/gedeeld/logo-dark.svg" alt="Audinc">
+    </div>
+</div>
+
+<!-- ============================================================
+     DEEL A: HET ARTIKEL
+     ============================================================ -->
+<article class="article" id="top">
+
+    <div class="art-hero">
+        <picture>
+            <source media="(min-width: 960px)" srcset="/audinc/piep-na-het-festival/festival-crowd-1280.webp">
+            <source media="(min-width: 640px)" srcset="/audinc/piep-na-het-festival/festival-crowd-960.webp">
+            <img src="/audinc/piep-na-het-festival/festival-crowd-640.webp" alt="Festivalpubliek met handen in de lucht voor een hoofdpodium" width="1280" height="543" loading="eager" fetchpriority="high">
+        </picture>
+    </div>
+
+    <div class="art-head">
+        <span class="art-kicker">Gehoor &amp; festivals</span>
+
+        <h1>5 redenen waarom die piep na het festival serieuzer is dan je denkt</h1>
+
+        <p class="art-deck">Bijna iedereen kent hem: dat suizen als je thuiskomt en het eindelijk stil is. De meeste mensen wachten gewoon tot het overgaat. Meestal gaat het over. Soms niet, en dan is het niet meer terug te draaien.</p>
+
+        <div class="byline">21 augustus 2026 &middot; leestijd 4 minuten</div>
+    </div>
+
+    <!-- 1 -->
+    <div class="reason">
+        <picture>
+            <source media="(min-width: 640px)" srcset="/audinc/piep-na-het-festival/dicht-bij-de-speakers-960.webp">
+            <img src="/audinc/piep-na-het-festival/dicht-bij-de-speakers-640.webp" alt="Publiek dicht bij de speakers tijdens een set" width="960" height="768" loading="lazy">
+        </picture>
+        <h2>1. Een festivaldag is <span>harder</span> dan je denkt</h2>
+        <p>Geluid boven de 80 decibel kan bij langdurige blootstelling al schade veroorzaken. Bij 85 dB houden je oren het gemiddeld nog zo&rsquo;n twee uur vol. Dat is ongeveer &eacute;&eacute;n set.</p>
+        <p>In een festivaltent zit je al snel op 95 dB of meer. Vlak bij het hoofdpodium loopt het op tot rond de 103 dB. <strong>Bij 100 dB kan er al binnen een kwartier blijvende schade ontstaan.</strong></p>
+        <p>En een festivaldag duurt geen kwartier. Reken op acht tot twaalf uur, waarbij je oren ook aanstaan bij de bar en tussen de podia door.</p>
+        <div class="pull">Buiten valt het wel mee, denken veel mensen. Dat klopt maar deels. In de openlucht is de belasting lager dan in een zaal, maar sta je een uur dicht bij de speakers, dan is het verschil met een concertzaal klein.</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="reason">
+        <img src="/audinc/piep-na-het-festival/festivalpubliek-640.webp" alt="Jonge festivalbezoekers op het terrein" width="640" height="409" loading="lazy">
+        <h2>2. Die piep is geen kater, het is een waarschuwing</h2>
+        <p>Het suizen dat je hoort als het stil wordt, is geen onschuldig bijverschijnsel van een lange dag. Het is het signaal dat je oren overbelast zijn geraakt.</p>
+        <p>Meestal trekt het de volgende dag weg. Soms niet. Blijft het geluid hangen, een piep, gekraak of gebrom dat je ook &rsquo;s nachts hoort, dan heet dat tinnitus.</p>
+        <p><strong>Voor tinnitus bestaat geen behandeling en geen medicijn.</strong> Naar schatting hebben een miljoen mensen in Nederland er last van. De meesten moeten leren wennen aan een leven dat nooit meer helemaal stil is, met slaapproblemen en concentratieproblemen die daarbij horen.</p>
+        <p>Voorkomen is niet de beste oplossing. Het is de enige.</p>
+    </div>
+
+    <div class="inline-cta">
+        <a href="#naar-de-oplossing">Naar de oplossing &rarr;</a>
+    </div>
+
+    <!-- 3 -->
+    <div class="reason">
+        <picture>
+            <source media="(min-width: 640px)" srcset="/audinc/piep-na-het-festival/dansen-geluidsgolven-960.webp">
+            <img src="/audinc/piep-na-het-festival/dansen-geluidsgolven-640.webp" alt="Bezoeker danst voor het podium, met geluidsgolven in beeld" width="960" height="523" loading="lazy">
+        </picture>
+        <h2>3. Gehoorschade doet geen pijn en gaat niet met een klap</h2>
+        <p>Harde geluiden beschadigen de trilhaartjes in je binnenoor. Die haartjes zijn minuscuul, ze bewegen mee op geluidsgolven, en bij te veel of te lang geluid breken ze. <strong>Ze groeien niet terug.</strong></p>
+        <p>Het begint geleidelijk. Je verstaat mensen in een druk caf&eacute; iets minder goed. Bepaalde hoge tonen komen niet meer door. Je zet je muziek een tikje harder dan vorig jaar.</p>
+        <p>Omdat het per festival om een klein beetje gaat, merk je het pas als er al iets weg is. En wat weg is komt niet terug: hoortoestellen kunnen versterken, maar niet repareren.</p>
+        <p>Bij de meeste mensen neemt het gehoor sowieso al af rond het dertigste levensjaar. Elk festival telt daarbij op.</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="reason">
+        <h2>4. De gratis schuimdopjes zijn precies de reden dat je ze uitdoet</h2>
+        <p>Op veel festivals staan bakjes met gratis schuimdopjes. Alles is beter dan niets, maar er zit een probleem in.</p>
+        <p>Schuim dempt ongelijk. De hoge tonen verdwijnen grotendeels, de bassen blijven staan. Daardoor klinkt de muziek dof en versta je je vrienden nauwelijks meer.</p>
+        <div class="pull">Dat is de echte reden dat ze na een halfuur weer uitgaan. Niet omdat mensen hun gehoor niets waard vinden, maar omdat de dopjes de avond verpesten. En een dop die je uitdoet beschermt niets.</div>
+        <p>Er is nog een risico dat weinig mensen kennen: schuimdopjes kunnen in je gehoorgang afbreken. Dan sta je bij de EHBO om je oor te laten uitspuiten.</p>
+        <p>En je moet ze eerst nog zien te vinden op het terrein. Die zoektocht is voor veel bezoekers precies het moment waarop ze besluiten dat het ook wel zonder kan.</p>
+    </div>
+
+    <div class="inline-cta">
+        <a href="#naar-de-oplossing">Naar de oplossing &rarr;</a>
+    </div>
+
+    <!-- 5: pas hier komt het merk binnen -->
+    <div class="reason">
+        <picture>
+            <source media="(min-width: 640px)" srcset="/audinc/piep-na-het-festival/afdruk-maken-960.webp">
+            <img src="/audinc/piep-na-het-festival/afdruk-maken-640.webp" alt="Specialist maakt een afdruk van de gehoorgang voor oordoppen op maat" width="960" height="604" loading="lazy">
+        </picture>
+        <h2>5. Wat wel werkt: een filter dat je vergeet dat je het in hebt</h2>
+        <p>In een filterdop zit een akoestisch filter dat het geluidsniveau over de hele breedte verlaagt, in plaats van alleen de hoge tonen weg te halen. Je hoort de muziek zoals hij bedoeld is, alleen zachter, en gesprekken blijven verstaanbaar. Afhankelijk van het filter dempen ze 11 tot 28 dB.</p>
+        <p>Op maat maakt daarbovenop twee dingen uit. Ze worden gegoten op een afdruk van jouw oren, dus ze sluiten echt af. <strong>Bij een universele dop die net niet goed zit lekt geluid langs de rand naar binnen en haal je de opgegeven demping niet.</strong> En ze blijven zitten zonder te drukken, ook na tien uur dansen.</p>
+        <div class="pull">Doppen die je vergeet, hou je in. Dat is uiteindelijk waar het om draait.</div>
+        <p>Audinc maakt ze in het eigen 3D-lab in Eindhoven. Het aanmeten zelf duurt ongeveer zes minuten; voor de hele afspraak staat twintig minuten, zodat je rustig demo&rsquo;s kunt bekijken en een kleur kunt kiezen. <strong>Die aanmeting is gratis en vrijblijvend.</strong></p>
+
+        <figure>
+            <img src="/audinc/piep-na-het-festival/custom-music-560.webp" alt="Custom Music festivaloordoppen van Audinc, gegoten op maat met filter" width="560" height="217" loading="lazy">
+            <figcaption>Custom Music, de festivaldop van Audinc. Het zilveren rondje is het verwisselbare filter.</figcaption>
+        </figure>
+    </div>
+
+</article>
+
+<!-- ============ TRUST MARQUEE, precies op de naad ============ -->
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Aanmeting is gratis</span>
+        <span>Muziek blijft in balans</span>
+        <span>Blijft zitten na tien uur</span>
+        <span>Eigen 3D-lab in Eindhoven</span>
+        <span>Minimaal 2 jaar garantie</span>
+        <span>100% comfortgarantie</span>
+        <span>Aanmeting is gratis</span>
+        <span>Muziek blijft in balans</span>
+        <span>Blijft zitten na tien uur</span>
+        <span>Eigen 3D-lab in Eindhoven</span>
+        <span>Minimaal 2 jaar garantie</span>
+        <span>100% comfortgarantie</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     DEEL B: HET BOEKINGSBLOK (het "productpagina"-deel)
+     De naad. Elke CTA in het artikel scrollt hierheen.
+     ============================================================ -->
+<section class="offer" id="naar-de-oplossing">
+    <div class="container">
+        <div class="offer-grid">
+
+            <!-- Gallery -->
+            <div class="offer-media">
+                <div class="gallery-main">
+                    <img id="galMain" src="/audinc/piep-na-het-festival/custom-music-560.webp" alt="Custom Music festivaloordoppen op maat van Audinc" width="560" height="217" loading="lazy">
+                </div>
+                <div class="gallery-thumbs" id="galThumbs">
+                    <button type="button" class="active" data-src="/audinc/piep-na-het-festival/custom-music-560.webp" aria-label="Custom Music oordoppen"><img src="/audinc/piep-na-het-festival/custom-music-320.webp" alt="Custom Music oordoppen" width="320" height="124" loading="lazy"></button>
+                    <button type="button" data-src="/audinc/piep-na-het-festival/afdruk-maken-960.webp" aria-label="De afdruk wordt gemaakt"><img src="/audinc/piep-na-het-festival/afdruk-maken-320.webp" alt="De afdruk wordt gemaakt" width="320" height="201" loading="lazy"></button>
+                    <button type="button" data-src="/audinc/piep-na-het-festival/3d-lab-960.webp" aria-label="In het 3D-lab"><img src="/audinc/piep-na-het-festival/3d-lab-320.webp" alt="In het 3D-lab" width="320" height="171" loading="lazy"></button>
+                    <button type="button" data-src="/audinc/piep-na-het-festival/dansen-geluidsgolven-960.webp" aria-label="Waar je ze voor draagt"><img src="/audinc/piep-na-het-festival/dansen-geluidsgolven-320.webp" alt="Waar je ze voor draagt" width="320" height="174" loading="lazy"></button>
+                </div>
+            </div>
+
+            <!-- Aanbod -->
+            <div class="offer-body">
+                <div class="offer-eyebrow">De oplossing</div>
+                <h2>Festivaloordoppen op maat</h2>
+
+                <div class="offer-rating">
+                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <a href="#reviews">4,7/5 uit 317 reviews</a>
+                </div>
+
+                <p class="offer-lead">Custom Music is een filterdop, gegoten op een afdruk van jouw oren. Het volume gaat omlaag, de muziek blijft in balans en je kunt gewoon met je vrienden praten. De aanmeting duurt twintig minuten en is gratis.</p>
+
+                <div class="spec-row">
+                    <div class="spec">20 minuten<small>voor de hele aanmeting</small></div>
+                    <div class="spec">SNR 17 tot 31 dB<small>afhankelijk van het filter</small></div>
+                    <div class="spec">15 werkdagen<small>spoed is mogelijk</small></div>
+                    <div class="spec">13 locaties<small>door heel Nederland</small></div>
+                </div>
+
+                <div class="statcard">
+                    <b>De aanmeting kost niets</b>
+                    <small>Je komt langs, we bekijken je gehoorgang met een camera en maken de afdruk. Pas daarna beslis je of je ze laat maken. Zitten ze niet perfect, dan passen we ze kosteloos aan.</small>
+                </div>
+
+                <div class="price-card">
+                    <h3>Wat er bij de aanmeting gebeurt</h3>
+                    <ul class="price-incl">
+                        <li>Cameracheck van je gehoorgang, zodat de vorm klopt</li>
+                        <li>Een afdruk van beide oren, in ongeveer zes minuten</li>
+                        <li>Demo&rsquo;s luisteren en je filter en kleur kiezen</li>
+                        <li>Advies over welke demping bij jouw festivals past</li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-primary" onclick="advCta('offer_primary')">Plan je gratis aanmeting</button>
+                <p class="guarantee">Gratis en vrijblijvend. Je ziet direct <b>welke tijden vrij zijn</b> bij jou in de buurt.</p>
+
+                <div class="availability">
+                    <h4>Waar je terecht kunt</h4>
+                    <ul>
+                        <li><span>Amsterdam (Rokin en Sloterdijk)</span><span class="tag tag-free">2 locaties</span></li>
+                        <li><span>Utrecht, Den Haag, Rotterdam, Breda</span><span class="tag tag-free">Randstad en zuid</span></li>
+                        <li><span>Eindhoven, Nijmegen, Apeldoorn, Zwolle</span><span class="tag tag-free">Midden en oost</span></li>
+                        <li><span>Groningen en Maastricht</span><span class="tag tag-free">Noord en zuid</span></li>
+                    </ul>
+                </div>
+
+                <div class="acc">
+                    <div class="acc-item">
+                        <button class="acc-q" type="button" onclick="toggleAcc(this)">Hoe het verder gaat na de aanmeting</button>
+                        <div class="acc-a"><div>
+                            <table>
+                                <tr><td>Stap 1</td><td>Je boekt online een tijd op een van de twaalf vestigingen. Gratis en vrijblijvend.</td></tr>
+                                <tr><td>Stap 2</td><td>Cameracheck, afdruk van beide oren, demo&rsquo;s luisteren en je kleur en filter kiezen. Samen twintig minuten.</td></tr>
+                                <tr><td>Stap 3</td><td>Het eigen 3D-lab in Eindhoven maakt je oordoppen. Levertijd 15 werkdagen, met spoed als het krap wordt.</td></tr>
+                                <tr><td>Stap 4</td><td>Ophalen of thuisbezorgd, met controle op de pasvorm en uitleg over het onderhoud.</td></tr>
+                            </table>
+                        </div></div>
+                    </div>
+                    <div class="acc-item">
+                        <button class="acc-q" type="button" onclick="toggleAcc(this)">Schuim, universeel of op maat</button>
+                        <div class="acc-a"><div>
+                            Schuimdopjes dempen ongelijk, waardoor de muziek dof klinkt. Universele filterdoppen van de drogist houden het geluid wel in balans en zijn een prima eerste stap als je een keer per jaar gaat. Zitten ze net niet goed, dan lekt geluid langs de rand naar binnen en haal je de opgegeven demping niet. Op maat sluit wel af en blijft ook na tien uur comfortabel zitten.
+                        </div></div>
+                    </div>
+                    <div class="acc-item">
+                        <button class="acc-q" type="button" onclick="toggleAcc(this)">Tips voor de festivaldag zelf</button>
+                        <div class="acc-a"><div>
+                            Doe ze in v&oacute;&oacute;rdat je het terrein op loopt, niet pas als het te hard voelt, want dan heb je de eerste belasting al te pakken. Hou afstand tot de speakerstacks: tien meter verderop scheelt meer dan je denkt en het geluid is daar meestal beter gemixt. Plan een kwartier stilte tussen de acts die je toch niet wilde zien. En hou ze juist in bij je favoriete act, want dat is precies het moment waarop de meeste schade ontstaat.
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     REVIEWS
+     ============================================================ -->
+<section class="reviews" id="reviews">
+    <div class="container">
+        <div class="sec-head">
+            <h2>Wat klanten zeggen</h2>
+            <div class="reviews-proof">
+                <svg class="g-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <strong>4,7</strong>
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span>uit 64 Google-reviews</span>
+            </div>
+            <p>Op basis van 317 reviews.</p>
+        </div>
+        <div class="review-grid">
+            <div class="review">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <p>&ldquo;Zeer tevreden! Geen last meer van mijn oren na festivals.&rdquo;</p>
+                <div class="review-name">Daan Kuipers <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="review-meta">3 weken geleden &middot; Google</div>
+            </div>
+            <div class="review">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <p>&ldquo;Super tevreden met mijn op maat gemaakte oordoppen. Pasvorm is perfect en ik kan eindelijk weer zonder piep in mijn oren naar concerten.&rdquo;</p>
+                <div class="review-name">Cheryl Lugo <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="review-meta">1 maand geleden &middot; Google</div>
+            </div>
+            <div class="review">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <p>&ldquo;Als muzikant echt een must. Geluid blijft helder, geen doffe klank zoals bij standaard doppen.&rdquo;</p>
+                <div class="review-name">Aurelia Silva <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="review-meta">3 weken geleden &middot; Google</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="faq-sec" id="faq">
+    <div class="container">
+        <div class="sec-head"><h2>Veelgestelde vragen</h2></div>
+        <div class="faq-wrap acc">
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Hoe hard is een festival nou echt?</button>
+                <div class="acc-a"><div>Geluid boven de 80 decibel kan bij langdurige blootstelling al schade veroorzaken, en bij 85 dB houden je oren het gemiddeld zo&rsquo;n twee uur vol. In een tent zit je al snel op 95 dB, vlak bij het hoofdpodium op rond de 103 dB. Bij 100 dB kan er binnen een kwartier blijvende schade ontstaan.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Gaat die piep vanzelf over?</button>
+                <div class="acc-a"><div>Meestal wel, binnen een dag. Maar de piep betekent dat je oren overbelast zijn geweest, en die overbelasting laat elke keer een beetje schade achter. Blijft het geluid langer dan een paar dagen hangen, dan kan het tinnitus zijn en is het verstandig om je huisarts te bellen.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Hoor ik de muziek nog wel goed met filterdoppen?</button>
+                <div class="acc-a"><div>Ja, en dat is het verschil met schuim. Een akoestisch filter verlaagt het niveau over de hele breedte in plaats van alleen de hoge tonen weg te halen. De muziek klinkt hetzelfde, alleen zachter, en je kunt gewoon met je vrienden praten.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Wat kost het?</button>
+                <div class="acc-a"><div>De aanmeting is gratis en vrijblijvend: je betaalt pas als je na de afdruk besluit de oordoppen te laten maken. De prijzen van de modellen staan op audinc.nl en je krijgt ze bij de aanmeting te horen, inclusief etui en filters. Er komen geen kosten bij achteraf.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Hoe lang duurt de aanmeting?</button>
+                <div class="acc-a"><div>Het maken van de afdruk duurt ongeveer zes minuten. Voor de hele afspraak staat twintig minuten, zodat je rustig demo&rsquo;s kunt luisteren en een kleur en filter kunt kiezen.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Hoe snel heb ik ze in huis?</button>
+                <div class="acc-a"><div>De levertijd is 15 werkdagen. Wordt het krap voor je festival, dan is spoed mogelijk. Plan de aanmeting dus liever een maand van tevoren dan de week ervoor.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Zijn universele filterdoppen van de drogist ook goed?</button>
+                <div class="acc-a"><div>Voor &eacute;&eacute;n festival per jaar zijn ze een redelijke eerste stap, veel beter dan schuim. Het nadeel is dat ze niet op jouw oor gegoten zijn: zitten ze net niet goed, dan lekt er geluid langs de rand naar binnen en haal je de demping die op de verpakking staat niet.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Wat als ze niet lekker zitten?</button>
+                <div class="acc-a"><div>Dan pas je ze kosteloos aan. Audinc geeft 100% comfortgarantie en minimaal twee jaar garantie op het materiaal. De eerste drie maanden worden je filters gratis gewisseld en gecontroleerd.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ STICKY BOEKINGSBALK ============ -->
+<div class="sticky" id="stickyBar">
+    <div class="container">
+        <div class="sticky-info">
+            <img src="/audinc/piep-na-het-festival/custom-music-320.webp" alt="" width="320" height="124" loading="lazy">
+            <div>
+                <b>Festivaloordoppen op maat</b>
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span>4,7/5 &middot; aanmeting gratis</span>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="advCta('sticky')">Plan gratis aanmeting</button>
+    </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Adres</h4>
+                <address>
+                    Audinc<br>
+                    Hastelweg 260 D<br>
+                    5652CN Eindhoven<br>
+                    Nederland
+                </address>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>
+                    <a href="mailto:info@audinc.nl">info@audinc.nl</a><br>
+                    <a href="tel:0850600012">085-0600012</a><br>
+                    <span style="opacity:.7;">Ma t/m vr 09:00 &ndash; 17:00</span>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Klantenservice</h4>
+                <ul class="footer-links">
+                    <li><a href="https://audinc.nl/contact/">Contact</a></li>
+                    <li><a href="https://audinc.nl/support/">Support</a></li>
+                    <li><a href="https://audinc.nl/levertijd/">Levertijden</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Dit artikel is geschreven en betaald door Audinc, specialist in gehoorbescherming op maat. Het vervangt geen medisch advies.</p>
+            <p>&copy; 2026 Audinc. Alle rechten voorbehouden.</p>
+        </div>
+    </div>
+<p class="lp-legal" style="margin:16px 0 0;font-size:13px;opacity:.75;text-align:center"><a href="https://audinc.nl/privacyverklaring/" style="color:inherit">Privacyverklaring</a> &middot; <a href="#" data-consent-open style="color:inherit">Cookievoorkeuren</a></p>
+</footer>
+
+<script>
+// ============ TRACKING: Capture URL params ============
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const trackingKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const tracked = {};
+    trackingKeys.forEach(function(key) {
+        const val = params.get(key);
+        if (val) {
+            tracked[key] = val;
+            try { sessionStorage.setItem(key, val); } catch(e) {}
+        } else {
+            try {
+                const stored = sessionStorage.getItem(key);
+                if (stored) tracked[key] = stored;
+            } catch(e) {}
+        }
+    });
+    window.__lpTracking = tracked;
+})();
+
+// ============ CTA: opent de boekingswizard + dataLayer ============
+function advCta(placement) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'advertorial_cta_click', cta_placement: placement, advertorial: 'piep-na-het-festival' });
+    if (typeof window.openModal === 'function') window.openModal();
+}
+
+// ============ ACCORDION ============
+function toggleAcc(btn) {
+    var item = btn.parentElement;
+    var answer = item.querySelector('.acc-a');
+    var isOpen = item.classList.contains('open');
+    var scope = item.closest('.acc');
+    scope.querySelectorAll('.acc-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.acc-a').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+}
+
+// ============ GALLERY ============
+(function() {
+    var main = document.getElementById('galMain');
+    var thumbs = document.getElementById('galThumbs');
+    if (!main || !thumbs) return;
+    thumbs.querySelectorAll('button').forEach(function(b) {
+        b.addEventListener('click', function() {
+            main.src = this.getAttribute('data-src');
+            thumbs.querySelectorAll('button').forEach(function(x) { x.classList.remove('active'); });
+            this.classList.add('active');
+        });
+    });
+})();
+
+// ============ ANKERSCROLL + meting van de naad ============
+// De server injecteert <base href="/audinc/<page>/">, dus relatieve URL's
+// resolven daartegen. Voor anchors dus preventDefault + handmatig scrollen,
+// en de hash op het HUIDIGE pad zetten zodat /piep-na-het-festival blijft staan.
+(function() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var hash = this.getAttribute('href');
+            if (!hash || hash === '#') return;
+            var target = document.getElementById(hash.slice(1));
+            if (!target) return;
+            e.preventDefault();
+            if (hash === '#naar-de-oplossing') {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: 'advertorial_cta_click', cta_placement: 'in_article', advertorial: 'piep-na-het-festival' });
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (history.replaceState) {
+                history.replaceState(null, '', window.location.pathname + hash);
+            }
+        });
+    });
+})();
+
+// ============ STICKY BALK + offer_view event ============
+(function() {
+    var bar = document.getElementById('stickyBar');
+    var offer = document.getElementById('naar-de-oplossing');
+    if (!bar || !offer) return;
+
+    // Balk verschijnt zodra het artikel voorbij de eerste vouw is.
+    window.addEventListener('scroll', function() {
+        bar.classList.toggle('active', window.scrollY > 600);
+    }, { passive: true });
+
+    // Eén keer meten dat het boekingsblok echt in beeld is geweest.
+    if ('IntersectionObserver' in window) {
+        var seen = false;
+        new IntersectionObserver(function(entries) {
+            entries.forEach(function(en) {
+                if (en.isIntersecting && !seen) {
+                    seen = true;
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({ event: 'advertorial_offer_view', advertorial: 'piep-na-het-festival' });
+                }
+            });
+        }, { threshold: 0.25 }).observe(offer);
+    }
+})();
+</script>
+
+<script src="/audinc/booking.js" defer></script>
+<script src="/audinc/lp-consent.js" defer></script>
+</body>
+</html>

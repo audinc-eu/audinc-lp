@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Consent Mode v2 + GTM-KVKKTQK, zelfde volgorde als BaseLayout.astro -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+    });
+    gtag('set', 'url_passthrough', true);
+    try {
+        var lees = function (n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : null; };
+        var keuze = null, eigen = lees('audinc_consent');
+        if (eigen) { var c = JSON.parse(eigen); if (c && c.v === 1) keuze = c; }
+        if (!keuze) {
+            var cy = lees('cookieyes-consent');
+            if (cy) {
+                var v = {};
+                cy.split(',').forEach(function (d) { var kv = d.split(':'); v[(kv[0] || '').trim()] = (kv[1] || '').trim(); });
+                if (v.action === 'yes') keuze = { analytics: v.analytics === 'yes', marketing: v.advertisement === 'yes' };
+            }
+        }
+        if (keuze) {
+            var ads = keuze.marketing ? 'granted' : 'denied';
+            gtag('consent', 'update', { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: keuze.analytics ? 'granted' : 'denied' });
+        }
+    } catch (e) {}
+    </script>
+    <script>
+    // GTM alleen op de echte domeinen. Op een preview of lokaal alleen met
+    // ?gtm_debug (Tag Assistant) of ?lp_gtm=1, anders telt een testboeking als
+    // echte conversie in Google Ads.
+    (function (w, d, s, l, i) {
+        var h = location.hostname.replace(/^www\./, '');
+        var echt = /^audinc\.(nl|be|eu|de|cy|lt)$/.test(h);
+        if (!echt && !/[?&](gtm_debug|lp_gtm)=/.test(location.search)) return;
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KVKKTQK');
+    </script>
+
+    <meta name="robots" content="noindex, nofollow">
+    <title>Zitten je oren vol? Doe de check in 1 minuut | Audinc</title>
+    <meta name="description" content="Zes korte vragen over hoe je oor aanvoelt en klinkt. Je ziet meteen of je klachten passen bij een oorsmeerprop, en je kunt direct een behandeling of een gratis aanmeting inplannen.">
+    <link rel="icon" href="/audinc/gedeeld/favicon.ico" type="image/x-icon">
+    <link rel="preload" as="image" href="/audinc/gedeeld/inspectie-960.webp" fetchpriority="high">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --orange:#f26722; --orange-dark:#d4551a; --orange-light:#fff3ec;
+  --green:#10bf0c; --green-dark:#0d9a0a; --green-soft:#effbee;
+  --dark:#1a1a2e; --text:#333; --muted:#6b6b78; --faint:#9a9aa5;
+  --bg:#f7f5f2; --card:#fff; --line:#eae6e0; --line-soft:#f2efea;
+  --serif: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+  --r:14px; --r-lg:20px;
+  --sh:0 1px 2px rgba(26,26,46,.04),0 6px 20px rgba(26,26,46,.06);
+  --sh-lg:0 2px 4px rgba(26,26,46,.04),0 14px 40px rgba(26,26,46,.10);
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+  color:var(--text);background:var(--bg);line-height:1.62;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+/* ---------- topbar ---------- */
+.top{background:#fff;border-bottom:1px solid var(--line);padding:13px 0;position:sticky;top:0;z-index:50}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.top-in img{height:26px;width:auto}
+.top-tag{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;
+  color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+.top-tag i{width:6px;height:6px;border-radius:50%;background:var(--green);display:block}
+.pshell{height:4px;background:var(--line-soft);overflow:hidden}
+.pbar{height:100%;width:0;background:linear-gradient(90deg,var(--orange),#ff8b4d);
+  transition:width .4s cubic-bezier(.4,0,.2,1);border-radius:0 4px 4px 0}
+
+/* ---------- screens ---------- */
+.screen{display:none}
+.screen.on{display:block;animation:in .3s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- intro ---------- */
+.hero{padding:34px 0 12px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--orange-dark);
+  background:var(--orange-light);border-radius:999px;padding:6px 13px;margin-bottom:16px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.75rem,6.4vw,2.5rem);
+  line-height:1.14;letter-spacing:-.015em;color:var(--dark);margin-bottom:14px}
+.lead{font-size:1.05rem;color:var(--muted);margin-bottom:24px;max-width:34em}
+
+.hero-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);margin-bottom:24px}
+.hero-img img{width:100%;aspect-ratio:16/9;object-fit:cover}
+
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.pill{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:8px 14px;font-size:.83rem;font-weight:500;color:var(--text)}
+.pill svg{width:15px;height:15px;flex:none;color:var(--green)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  border:none;cursor:pointer;background:var(--orange);color:#fff;font-family:inherit;
+  font-size:1.03rem;font-weight:600;padding:17px 24px;border-radius:var(--r);
+  box-shadow:0 4px 16px rgba(242,103,34,.28);transition:background .18s,transform .1s,box-shadow .18s}
+.btn:hover{background:var(--orange-dark);box-shadow:0 6px 22px rgba(242,103,34,.34)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{background:#dcd8d2;color:#fff;box-shadow:none;cursor:not-allowed}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-alt{background:#fff;color:var(--dark);border:2px solid var(--dark);box-shadow:none}
+.btn-alt:hover{background:var(--dark);color:#fff}
+.btn-ghost{background:transparent;color:var(--muted);box-shadow:none;font-weight:500;font-size:.9rem;padding:13px}
+.btn-ghost:hover{background:transparent;color:var(--dark);box-shadow:none}
+.undercta{text-align:center;font-size:.83rem;color:var(--muted);margin-top:11px}
+.undercta b{color:var(--dark);font-weight:600}
+
+/* ---------- vragen ---------- */
+.qwrap{padding:22px 0 60px}
+.qcount{font-size:.75rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:10px}
+.qtitle{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,5.2vw,1.85rem);
+  line-height:1.24;letter-spacing:-.01em;color:var(--dark);margin-bottom:7px}
+.qhelp{font-size:.9rem;color:var(--muted);margin-bottom:20px}
+
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.opt{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--line);
+  border-radius:var(--r);padding:14px 16px;cursor:pointer;text-align:left;width:100%;
+  font-family:inherit;font-size:.98rem;color:var(--text);
+  transition:border-color .15s,background .15s,box-shadow .15s}
+.opt:hover{border-color:#d6d0c8;box-shadow:var(--sh)}
+.opt.sel{border-color:var(--orange);background:var(--orange-light);box-shadow:0 2px 10px rgba(242,103,34,.12)}
+.opt-ico{flex:none;width:42px;height:42px;border-radius:11px;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;transition:background .15s}
+.opt.sel .opt-ico{background:#fff}
+.opt-ico svg{width:23px;height:23px;color:var(--orange)}
+.opt-txt{flex:1;line-height:1.36}
+.opt-check{flex:none;width:23px;height:23px;border-radius:50%;border:2px solid #d6d0c8;
+  display:flex;align-items:center;justify-content:center;transition:all .15s}
+.opt.multi .opt-check{border-radius:7px}
+.opt.sel .opt-check{border-color:var(--orange);background:var(--orange)}
+.opt-check svg{width:13px;height:13px;color:#fff;opacity:0;transition:opacity .15s}
+.opt.sel .opt-check svg{opacity:1}
+
+.nav{display:flex;flex-direction:column;gap:2px}
+
+/* ---------- uitkomst ---------- */
+.rwrap{padding:26px 0 60px}
+.verdict{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-lg);
+  padding:30px 24px;margin-bottom:16px;border-top:5px solid var(--orange)}
+.verdict.warn{border-top-color:#e5a100}
+.verdict.calm{border-top-color:#7d8a9c}
+.vtag{display:inline-block;font-size:.71rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--orange-dark);background:var(--orange-light);padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.verdict.warn .vtag{color:#8a6300;background:#fff6e0}
+.verdict.calm .vtag{color:#4a5666;background:#eef1f5}
+.verdict h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,5.4vw,2.05rem);
+  line-height:1.2;letter-spacing:-.015em;color:var(--dark);margin-bottom:14px}
+.verdict p{color:var(--muted);margin-bottom:13px}
+.verdict p:last-child{margin-bottom:0}
+.verdict b{color:var(--dark);font-weight:600}
+
+.because{background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 20px;margin-bottom:28px}
+.because h3{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);
+  font-weight:800;margin-bottom:12px}
+.because ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.because li{display:flex;gap:10px;font-size:.93rem;line-height:1.45}
+.because li svg{width:17px;height:17px;flex:none;color:var(--green);margin-top:4px}
+
+/* aanbodkaarten */
+.sechead{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+.sechead span{font-size:.73rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.sechead::after{content:'';height:1px;background:var(--line);flex:1}
+
+.offer{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh);overflow:hidden;margin-bottom:14px}
+.offer.lead-offer{box-shadow:var(--sh-lg)}
+.offer > img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.offer-in{padding:24px 22px}
+.offer-kicker{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;
+  letter-spacing:.07em;text-transform:uppercase;border-radius:999px;padding:5px 11px;margin-bottom:11px}
+.k-paid{color:var(--orange-dark);background:var(--orange-light)}
+.k-free{color:var(--green-dark);background:var(--green-soft)}
+.offer h3{font-family:var(--serif);font-weight:400;font-size:1.45rem;line-height:1.24;
+  color:var(--dark);letter-spacing:-.01em;margin-bottom:9px}
+.offer p{color:var(--muted);font-size:.96rem;margin-bottom:16px}
+.offer p:last-of-type{margin-bottom:18px}
+
+.steps{list-style:none;display:flex;flex-direction:column;gap:15px;margin-bottom:20px}
+.steps li{display:flex;gap:13px}
+.stepn{flex:none;width:27px;height:27px;border-radius:50%;background:var(--orange-light);
+  color:var(--orange-dark);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.steps strong{display:block;color:var(--dark);font-size:.96rem;font-weight:600;line-height:1.35}
+.steps span{font-size:.9rem;color:var(--muted);line-height:1.5}
+
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:20px}
+.fact{background:var(--bg);border-radius:11px;padding:11px 13px}
+.fact b{display:block;font-size:.93rem;color:var(--dark);font-weight:600}
+.fact span{font-size:.78rem;color:var(--muted)}
+
+.ticks{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.ticks li{display:flex;gap:10px;font-size:.94rem;line-height:1.45}
+.ticks li svg{width:17px;height:17px;flex:none;color:var(--green);margin-top:4px}
+
+/* locaties */
+.locs{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin-bottom:28px}
+.locs h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:800;margin-bottom:12px}
+.locgrid{display:flex;flex-wrap:wrap;gap:7px}
+.loc{font-size:.86rem;color:var(--text);background:var(--bg);border-radius:8px;padding:6px 11px}
+.stars{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft);
+  font-size:.86rem;color:var(--muted)}
+.stars svg{width:15px;height:15px;color:#f5a623;flex:none}
+.stars b{color:var(--dark);font-weight:600}
+
+/* faq */
+.faq{margin-bottom:24px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.faq details[open]{border-color:#ddd7cf}
+.faq summary{padding:16px 19px;cursor:pointer;font-weight:500;font-size:.96rem;color:var(--dark);
+  list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'';flex:none;width:11px;height:11px;margin-top:6px;
+  border-right:2px solid var(--orange);border-bottom:2px solid var(--orange);
+  transform:rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:9px}
+.faq .fa{padding:0 19px 17px;font-size:.93rem;color:var(--muted);line-height:1.6}
+
+.disc{font-size:.83rem;color:var(--muted);line-height:1.6;background:#efece7;
+  border-radius:var(--r);padding:17px 19px;margin-bottom:26px}
+.disc b{color:var(--text);font-weight:600}
+
+footer{padding:22px 0 44px;text-align:center;font-size:.79rem;color:var(--faint)}
+footer a{color:var(--faint)}
+
+/* sticky verkoopbalk op de uitkomst */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.97);
+  backdrop-filter:saturate(180%) blur(12px);border-top:1px solid var(--line);
+  padding:11px 0 calc(11px + env(safe-area-inset-bottom));
+  transform:translateY(110%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -4px 24px rgba(26,26,46,.08)}
+.sticky.on{transform:none}
+.sticky-in{display:flex;align-items:center;gap:14px;max-width:680px;margin:0 auto;padding:0 20px}
+.sticky-txt{flex:1;min-width:0}
+.sticky-txt b{display:block;font-size:.92rem;color:var(--dark);font-weight:600;line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-txt span{font-size:.78rem;color:var(--muted)}
+.sticky .btn{width:auto;flex:none;padding:13px 20px;font-size:.94rem}
+.rwrap{padding-bottom:104px}
+
+@media (max-width:420px){
+  .sticky-txt span{display:none}
+  .sticky .btn{padding:13px 16px;font-size:.9rem}
+}
+@media (min-width:680px){
+  .nav{flex-direction:row-reverse;align-items:center;gap:12px}
+  .nav .btn{width:auto;min-width:220px}
+  .nav .btn-ghost{min-width:0}
+  .offer-in{padding:30px 32px}
+  .verdict{padding:38px 34px}
+  .hero{padding:48px 0 12px}
+}
+</style>
+    <link rel="stylesheet" href="/audinc/booking.css">
+    <script>window.AUDINC_BOOKING={"defaultServiceId":14,"paid":true,"prepayNote":"Je rekent nu €25 onderzoekskosten online af, met iDEAL, creditcard of Apple Pay. Het uitzuigen kost €27,50 per behandeld oor en betaal je op locatie. Wordt er geen oorsmeer gevonden, dan betaal je alleen de onderzoekskosten. Kosteloos annuleren of verzetten kan tot 24 uur vooraf.","title":null,"backend":"audinc-site"};</script>
+</head>
+<body>
+
+<div class="top"><div class="wrap top-in">
+  <img src="/audinc/gedeeld/logo-dark.svg" alt="Audinc">
+  <span class="top-tag"><i></i> Oorcheck</span>
+</div></div>
+<div class="pshell"><div class="pbar" id="bar"></div></div>
+
+<div class="wrap">
+
+<!-- ==================== INTRO ==================== -->
+<section class="screen on" id="s-intro">
+  <div class="hero">
+    <span class="eyebrow">1 minuut &middot; geen gegevens nodig</span>
+    <h1>Zitten je oren vol, of hoor je gewoon minder?</h1>
+    <p class="lead">Zes korte vragen over hoe je oor aanvoelt en klinkt. Daarna zie je meteen of
+    je klachten passen bij een oorsmeerprop, en wat de logische volgende stap is.</p>
+
+    <div class="hero-img">
+      <img src="/audinc/gedeeld/inspectie-960.webp" alt="Inspectie van de gehoorgang met een microscoopcamera bij Audinc" width="960" height="540">
+    </div>
+
+    <div class="meta">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg> 6 vragen</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg> Geen e-mailadres</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg> Direct je uitkomst</span>
+    </div>
+
+    <button class="btn" id="start">Start de check
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+    <p class="undercta">Je uitkomst staat er direct. We vragen niets om hem te laten zien.</p>
+  </div>
+</section>
+
+<!-- ==================== VRAGEN ==================== -->
+<section class="screen" id="s-q">
+  <div class="qwrap">
+    <div class="qcount" id="qcount"></div>
+    <div class="qtitle" id="qtitle"></div>
+    <div class="qhelp" id="qhelp"></div>
+    <div class="opts" id="opts"></div>
+    <div class="nav">
+      <button class="btn" id="next">Volgende</button>
+      <button class="btn btn-ghost" id="back">Terug</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== UITKOMST ==================== -->
+<section class="screen" id="s-result">
+  <div class="rwrap">
+
+    <div class="verdict" id="verdict">
+      <span class="vtag" id="vtag"></span>
+      <h2 id="vtitle"></h2>
+      <div id="vbody"></div>
+    </div>
+
+    <div class="because" id="because">
+      <h3>Dit baseren we op jouw antwoorden</h3>
+      <ul id="becauselist"></ul>
+    </div>
+
+    <!-- primair aanbod: de behandeling -->
+    <div id="treatzone">
+      <div class="sechead"><span>De logische volgende stap</span></div>
+      <div class="offer lead-offer">
+        <img src="/audinc/gedeeld/microsuctie-960.webp" alt="Oorsmeer wordt onder de microscoop uit de gehoorgang gezogen" width="960" height="540" loading="lazy">
+        <div class="offer-in">
+          <span class="offer-kicker k-paid">Behandeling &middot; ongeveer 30 minuten</span>
+          <h3>Oorsmeer laten uitzuigen, onder zicht</h3>
+          <p>Geen water, geen druk op je trommelvlies. De behandelaar kijkt de hele tijd mee met een
+          microscoopcamera, en jij kijkt mee op het scherm.</p>
+          <ol class="steps">
+            <li><span class="stepn">1</span><div><strong>Eerst kijken</strong><span>Je ziet zelf wat er in je gehoorgang zit. Zit er niets, dan hoor je dat meteen en stopt het daar.</span></div></li>
+            <li><span class="stepn">2</span><div><strong>Zuigen, niet spuiten</strong><span>Het smeer gaat er onder zicht uit. Daarom kan het ook bij buisjes of een geopereerd oor.</span></div></li>
+            <li><span class="stepn">3</span><div><strong>Verschil hoor je direct</strong><span>Je krijgt een beeld van voor en na mee, zodat je ziet wat eruit is gekomen.</span></div></li>
+          </ol>
+          <div class="facts">
+            <div class="fact"><b>Beide oren</b><span>Vaste prijs, geen verrassingen</span></div>
+            <div class="fact"><b>Geen verwijzing</b><span>Je plant het zelf in</span></div>
+            <div class="fact"><b>Vaak deze week</b><span>Je kiest dag en tijd</span></div>
+            <div class="fact"><b>12 locaties</b><span>Door heel Nederland</span></div>
+          </div>
+          <button class="btn" id="book-treat">Plan je behandeling
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="undercta">Je kiest zelf dag, tijd en locatie. Bevestiging per e-mail.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- secundair aanbod: de gratis aanmeting -->
+    <div id="fitzone">
+      <div class="sechead"><span>Gratis, en nu het beste moment</span></div>
+      <div class="offer">
+        <img src="/audinc/gedeeld/oordoppen-aanmeten-960.webp" alt="Oordoppen op maat laten aanmeten bij Audinc" width="960" height="540" loading="lazy">
+        <div class="offer-in">
+          <span class="offer-kicker k-free">Gratis aanmeting &middot; ongeveer 20 minuten</span>
+          <h3>Oordoppen op maat, aangemeten in dezelfde stoel</h3>
+          <p id="fitIntro">Een afdruk van je gehoorgang kan alleen goed als die gehoorgang schoon is.
+          Zit er smeer voor, dan meet je de prop mee en past de dop later niet. Vlak na een
+          behandeling is dus letterlijk het beste moment om het te laten doen.</p>
+          <ul class="ticks">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>De aanmeting kost niets en verplicht tot niets.</b> Je beslist daarna pas of je doppen wilt.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>Voor slapen, werk, muziek, motor, zwemmen of prikkelgevoeligheid. Je kiest zelf het filter.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>100% comfortgarantie. Zit een dop niet lekker, dan passen we hem kosteloos aan.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>Eigen 3D-lab, dus geen tussenpartij en geen verborgen kosten.</span></li>
+          </ul>
+          <button class="btn btn-alt" id="book-fit">Plan een gratis aanmeting</button>
+          <p class="undercta">Vrijblijvend en <b>zonder kosten</b>. Los te plannen van je behandeling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="locs" id="locs">
+      <h4>Waar je terechtkunt</h4>
+      <div class="locgrid">
+        <span class="loc">Amsterdam Rokin</span><span class="loc">Amsterdam Sloterdijk</span>
+        <span class="loc">Utrecht</span><span class="loc">Rotterdam</span>
+        <span class="loc">Den Haag</span><span class="loc">Eindhoven</span>
+        <span class="loc">Nijmegen</span><span class="loc">Groningen</span>
+      </div>
+      <div class="stars">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.7-4.9 4.5 1.3 6.5L12 16.8 6.1 20l1.3-6.5L2.5 9l6.6-.7z"/></svg>
+        <span><b>4,7 uit 5</b> op basis van 317 reviews</span>
+      </div>
+    </div>
+
+    <div class="faq" id="faq">
+      <details><summary>Doet het uitzuigen pijn?</summary><div class="fa">Nee. Er wordt niets in je oor geduwd en er gaat geen water in. Je hoort het zuigen wel, dat klinkt als een lichte wind. De meeste mensen vinden het vooral raar klinken, niet vervelend.</div></details>
+      <details><summary>Waarom niet gewoon uitspuiten of druppelen?</summary><div class="fa">Druppels maken zacht smeer losser, maar hard ingedroogd smeer schuiven ze vaak dieper. Bij uitspuiten werk je op de gok, want je ziet niet waar de prop zit. Bij uitzuigen kijkt de behandelaar er de hele tijd bij.</div></details>
+      <details><summary>Ik heb buisjes of een geopereerd oor. Kan het dan?</summary><div class="fa">Meestal juist wel, omdat er geen water aan te pas komt. Geef het even aan bij het maken van je afspraak, dan houden we er rekening mee.</div></details>
+      <details><summary>Moet ik de aanmeting en de behandeling samen plannen?</summary><div class="fa">Nee, het zijn twee losse afspraken die je allebei zelf inplant. Wel handig om de aanmeting kort na de behandeling te zetten, want een afdruk van een schone gehoorgang past nu eenmaal beter.</div></details>
+      <details><summary>Wordt het uitzuigen vergoed?</summary><div class="fa">Nee, dit valt niet onder de basisverzekering. Het geldt wel als medische kosten die je mogelijk kunt opgeven bij je belastingaangifte. De aanmeting voor oordoppen is sowieso gratis.</div></details>
+      <details><summary>Wat als er niets in blijkt te zitten?</summary><div class="fa">Dan zie je dat op het scherm en weet je meteen dat je klacht ergens anders vandaan komt. Je krijgt dan advies over wat de logische volgende stap is.</div></details>
+    </div>
+
+    <div class="disc">
+      <b>Over deze uitkomst.</b> Dit is een vragenlijst, geen medisch onderzoek. Zekerheid krijg je
+      als iemand met de camera in je gehoorgang kijkt, en dat is precies wat er bij de inspectie
+      gebeurt. Twijfel je over iets anders dan oorsmeer, overleg dan met je huisarts.
+    </div>
+
+    <button class="btn btn-ghost" id="again">Opnieuw beginnen</button>
+  </div>
+</section>
+
+<footer>Audinc &middot; <a href="https://audinc.nl" target="_blank" rel="noopener">audinc.nl</a><p class="lp-legal" style="margin:16px 0 0;font-size:13px;opacity:.75;text-align:center"><a href="https://audinc.nl/privacyverklaring/" style="color:inherit">Privacyverklaring</a> &middot; <a href="#" data-consent-open style="color:inherit">Cookievoorkeuren</a></p>
+</footer>
+</div>
+
+<div class="sticky" id="sticky"><div class="sticky-in">
+  <div class="sticky-txt">
+    <b>Oorsmeer laten uitzuigen</b>
+    <span>Beide oren &middot; ongeveer 30 minuten &middot; 12 locaties</span>
+  </div>
+  <button class="btn" id="sticky-book">Plan afspraak</button>
+</div></div>
+
+<script>
+(function () {
+'use strict';
+
+var ICO = {
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  ear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 8a6 6 0 1 1 12 0c0 3-2 4-3.5 5.5S13 16 13 18a3 3 0 0 1-6 0"/><path d="M9.5 8a2.5 2.5 0 0 1 5 0c0 1.5-1 2-1.8 2.8"/></svg>',
+  both:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 8a3.5 3.5 0 0 1 7 0c0 2-1.2 2.6-2 3.4-.8.8-1 1.4-1 2.6a1.9 1.9 0 0 1-3.8 0"/><path d="M14 8a3.5 3.5 0 0 1 7 0c0 2-1.2 2.6-2 3.4-.8.8-1 1.4-1 2.6a1.9 1.9 0 0 1-3.8 0"/></svg>',
+  press:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M8.5 12h7M12 8.5v7"/></svg>',
+  wave:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h2l2-5 3 10 3-13 3 16 2-8h3"/></svg>',
+  water:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3s6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 6-10 6-10z"/></svg>',
+  cotton:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 18 18 6"/><circle cx="4.6" cy="19.4" r="2.1"/><circle cx="19.4" cy="4.6" r="2.1"/></svg>',
+  buds:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M7 6v7a3 3 0 0 0 6 0V6"/><rect x="4" y="14" width="6" height="6" rx="3"/><path d="M17 5v9a3 3 0 0 1-3 3"/></svg>',
+  time:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  slow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 10 12l3 3 7-8"/><path d="M20 7v5h-5"/></svg>',
+  speak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v4"/></svg>',
+  tv:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>',
+  people:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"/><path d="M16 14c2.8 0 5 1.7 5 4"/></svg>',
+  itch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 13V5.5a1.8 1.8 0 0 1 3.6 0V11"/><path d="M11.6 11V4.6a1.8 1.8 0 0 1 3.6 0V12"/><path d="M15.2 12V7.6a1.8 1.8 0 0 1 3.6 0V16a5 5 0 0 1-5 5h-2a6 6 0 0 1-6-6v-2.6"/></svg>',
+  dizzy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9.5l2 2-2 2M15 9.5l-2 2 2 2"/><path d="M9 17h6"/></svg>',
+  drops:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9.5 3h5l-.8 4.6h-3.4z"/><path d="M8.4 7.6h7.2l1 11.4a2 2 0 0 1-2 2.2H9.4a2 2 0 0 1-2-2.2z"/></svg>',
+  doctor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>',
+  none:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.4v.6"/></svg>',
+  repeat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a7 7 0 0 1 12-4l2 2"/><path d="M20 14a7 7 0 0 1-12 4l-2-2"/><path d="M18 4v4h-4M6 20v-4h4"/></svg>'
+};
+
+/* Trafft-diensten. 14 = oren reiniging microsuctie (betaald), 4 = aanmeting (gratis). */
+var SERVICE_TREATMENT = 14, SERVICE_FITTING = 4;
+
+var Q = [
+  { id:'welk_oor', title:'Hoor je op dit moment minder dan normaal?', help:'Kies wat het dichtst in de buurt komt.', multi:false, options:[
+    { t:'Ja, aan een oor', ico:'ear', p:3, why:'Je hoort aan een oor minder, en dat wijst zelden op ouderdomsslechthorendheid.' },
+    { t:'Ja, aan allebei mijn oren', ico:'both', p:1, why:'Je hoort aan beide oren minder.' },
+    { t:'Niet echt minder, het voelt vooral vol', ico:'press', p:2, why:'Je oor voelt vol of drukkend aan.' },
+    { t:'Nee, ik heb iets anders, zoals een piep of jeuk', ico:'wave', p:0, why:'Je hoort normaal, maar er is wel iets anders aan de hand.' }
+  ]},
+  { id:'hoe_klinkt', title:'Hoe zou je het omschrijven?', help:'De manier waarop het klinkt zegt veel over de oorzaak.', multi:false, options:[
+    { t:'Gedempt, alsof er watten in zitten', ico:'ear', p:3, why:'Een gedempt geluid, alsof er iets voor zit.' },
+    { t:'Alsof ik onder water zit', ico:'water', p:3, why:'Het klinkt alsof je onder water zit.' },
+    { t:'Vol en drukkend, alsof mijn oor dicht zit', ico:'press', p:2, why:'Een vol, drukkend gevoel in je oor.' },
+    { t:'Mijn eigen stem klinkt hol of te luid in mijn hoofd', ico:'speak', p:2, why:'Je eigen stem klinkt hol, iets wat vaak gebeurt als de gehoorgang afgesloten is.' },
+    { t:'Gewoon zachter, verder klinkt alles normaal', ico:'slow', p:1, why:'Alles klinkt zachter, maar verder normaal.' }
+  ]},
+  { id:'wanneer', title:'Wanneer merkte je het voor het eerst?', help:'', multi:false, options:[
+    { t:'Ineens, vlak na douchen, zwemmen of haren wassen', ico:'water', p:4, why:'Het begon vlak na contact met water. Oorsmeer zet uit als het nat wordt, en dan sluit een prop in een keer af.' },
+    { t:'In een paar dagen tijd erger geworden', ico:'time', p:2, why:'Het is in een paar dagen erger geworden.' },
+    { t:'Al weken, het komt en gaat', ico:'repeat', p:2, why:'Het speelt al weken en komt steeds terug.' },
+    { t:'Al maanden of jaren, heel geleidelijk', ico:'slow', p:0, flag:'geleidelijk', why:'Het gaat heel geleidelijk, al maanden of jaren.' }
+  ]},
+  { id:'signalen', title:'Wat herken je nog meer?', help:'Je mag meerdere antwoorden aanklikken.', multi:true, options:[
+    { t:'Een piep, ruis of suizend geluid', ico:'wave', p:1, why:'Je hoort een piep of ruis.' },
+    { t:'Jeuk in mijn oor', ico:'itch', p:1, why:'Je hebt jeuk in je oor, een bekend signaal bij ophoping van smeer.' },
+    { t:'Af en toe duizelig of licht in mijn hoofd', ico:'dizzy', p:1, why:'Je bent af en toe wat duizelig.' },
+    { t:'De tv of mijn telefoon staat harder dan vroeger', ico:'tv', p:1, why:'Je zet het volume hoger dan je gewend was.' },
+    { t:'In een druk gesprek moet ik echt mijn best doen', ico:'people', p:1, why:'Verstaan in een rumoerige ruimte kost je moeite.' },
+    { t:'Mijn oordopjes of hoortoestel piepen', ico:'buds', p:2, tag:'draagt', why:'Je oordopjes of hoortoestel gaan piepen, wat gebeurt als geluid terugkaatst op een prop.' },
+    { t:'Niets van dit alles', ico:'none', p:0, exclusive:true, why:'' }
+  ]},
+  { id:'gewoontes', title:'Herken je een van deze dingen?', help:'Ook hier mag je er meerdere aanklikken.', multi:true, options:[
+    { t:'Ik maak mijn oren schoon met wattenstaafjes', ico:'cotton', p:2, why:'Je gebruikt wattenstaafjes. Die halen een beetje weg en duwen de rest verder naar binnen.' },
+    { t:'Ik draag vaak oordopjes, in-ears of een hoortoestel', ico:'buds', p:2, tag:'draagt', why:'Je draagt regelmatig iets in je oor, waardoor smeer minder makkelijk naar buiten werkt.' },
+    { t:'Ik zwem, douche of sport veel', ico:'water', p:1, tag:'water', why:'Je oren komen vaak in aanraking met water.' },
+    { t:'Ik heb dit vaker gehad, bij mij komt het terug', ico:'repeat', p:3, tag:'terugkerend', why:'Je hebt dit eerder gehad. Bij een deel van de mensen maakt het lichaam nu eenmaal sneller smeer aan.' },
+    { t:'Niets van dit alles', ico:'none', p:0, exclusive:true, why:'' }
+  ]},
+  { id:'geprobeerd', title:'Heb je er al iets aan geprobeerd?', help:'', multi:false, options:[
+    { t:'Gedruppeld met olie of oordruppels, het hielp niet of maar kort', ico:'drops', p:2, why:'Druppelen hielp niet of maar even, wat past bij hard ingedroogd smeer.' },
+    { t:'Laten uitspuiten, maar het kwam terug', ico:'repeat', p:3, why:'Uitspuiten hielp niet blijvend.' },
+    { t:'Zelf geprobeerd met een staafje of een spuitje', ico:'cotton', p:2, why:'Je hebt het zelf geprobeerd.' },
+    { t:'Nog niets', ico:'none', p:0, why:'' }
+  ]}
+];
+
+var idx = 0, answers = Q.map(function(){return [];}), started = false;
+var el = function (id) { return document.getElementById(id); };
+function dl(o){ window.dataLayer = window.dataLayer || []; window.dataLayer.push(o); }
+
+function show(id){
+  ['s-intro','s-q','s-result'].forEach(function(s){ el(s).classList.remove('on'); });
+  el(id).classList.add('on');
+  window.scrollTo(0,0);
+}
+
+function progress(step){
+  el('bar').style.width = Math.min(100, step / Q.length * 100) + '%';
+}
+
+function renderQ(){
+  var q = Q[idx];
+  el('qcount').textContent = 'Vraag ' + (idx+1) + ' van ' + Q.length;
+  el('qtitle').textContent = q.title;
+  el('qhelp').textContent = q.help || '';
+  el('qhelp').style.display = q.help ? 'block' : 'none';
+
+  var box = el('opts'); box.innerHTML = '';
+  q.options.forEach(function(o,i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'opt' + (q.multi ? ' multi' : '') + (answers[idx].indexOf(i) > -1 ? ' sel' : '');
+    b.innerHTML = '<span class="opt-ico">' + (ICO[o.ico] || ICO.check) + '</span>' +
+                  '<span class="opt-txt">' + o.t + '</span>' +
+                  '<span class="opt-check">' + ICO.check + '</span>';
+    b.addEventListener('click', function(){ pick(i); });
+    box.appendChild(b);
+  });
+
+  el('back').style.display = idx === 0 ? 'none' : 'block';
+  el('next').textContent = idx === Q.length - 1 ? 'Bekijk mijn uitkomst' : 'Volgende';
+  el('next').disabled = answers[idx].length === 0;
+  progress(idx);
+}
+
+function pick(i){
+  var q = Q[idx], cur = answers[idx], o = q.options[i];
+  if (!q.multi){ answers[idx] = [i]; renderQ(); setTimeout(next, 230); return; }
+  if (o.exclusive){
+    answers[idx] = cur.indexOf(i) > -1 ? [] : [i];
+  } else {
+    var ex = q.options.map(function(x,n){ return x.exclusive ? n : -1; }).filter(function(n){ return n > -1; });
+    cur = cur.filter(function(n){ return ex.indexOf(n) === -1; });
+    var at = cur.indexOf(i);
+    if (at > -1){ cur.splice(at,1); } else { cur.push(i); }
+    answers[idx] = cur;
+  }
+  renderQ();
+}
+
+function next(){
+  if (!answers[idx].length) return;
+  dl({ event:'quiz_step', quiz_name:'audinc_oorcheck', step_number:idx+1, step_id:Q[idx].id, answer_count:answers[idx].length });
+  if (idx === Q.length - 1) return finish();
+  idx++; renderQ();
+}
+function back(){ if (idx > 0){ idx--; renderQ(); } }
+
+function read(){
+  var r = { pts:0, flags:{}, tags:{}, reasons:[] };
+  Q.forEach(function(q,qi){
+    answers[qi].forEach(function(oi){
+      var o = q.options[oi];
+      r.pts += o.p || 0;
+      if (o.flag) r.flags[o.flag] = true;
+      if (o.tag) r.tags[o.tag] = true;
+      if (o.why) r.reasons.push(o.why);
+    });
+  });
+  return r;
+}
+
+function finish(){
+  var r = read(), tag, title, body, level;
+
+  if (r.pts >= 10){
+    level = 'hoog';
+    tag = 'Duidelijk beeld';
+    title = 'Grote kans dat er een oorsmeerprop zit';
+    body = '<p>Wat je beschrijft is het patroon van een gehoorgang die afgesloten is door oorsmeer. Het ' +
+           'geluid is niet weg, het komt er alleen niet meer bij. Dat is ook waarom het zo plotseling kan ' +
+           'opkomen en waarom druppels het lang niet altijd oplossen.</p>' +
+           '<p><b>Dit is in een half uur verholpen</b>, en je merkt het verschil meteen. Geen verwijzing ' +
+           'nodig, je plant het zelf in.</p>';
+  } else {
+    level = 'midden';
+    tag = 'Goed mogelijk';
+    title = 'Je klachten passen bij een oorsmeerprop';
+    body = '<p>Een gedempt of vol oor komt in verreweg de meeste gevallen door oorsmeer dat de gehoorgang ' +
+           'afsluit. Het geluid is er nog, het komt er alleen niet meer bij. Dat is ook waarom het zo ' +
+           'plotseling kan opkomen en waarom druppels het lang niet altijd oplossen.</p>' +
+           '<p>Bij de inspectie zie je binnen twee minuten wat er zit. Zit er een prop, dan gaat hij er ' +
+           'meteen uit. <b>In een half uur ben je klaar</b>, en je hoort het verschil direct.</p>';
+  }
+
+  el('verdict').className = 'verdict';
+
+  if (r.flags.geleidelijk){
+    body += '<p><b>Nog dit.</b> Je gaf aan dat het geleidelijk gaat. Een schone gehoorgang is dan sowieso ' +
+            'het beginpunt, want zolang er smeer voor zit weet niemand hoeveel je echt hoort.</p>';
+  }
+
+  el('vtag').textContent = tag;
+  el('vtitle').textContent = title;
+  el('vbody').innerHTML = body;
+
+  var list = el('becauselist'); list.innerHTML = '';
+  r.reasons.slice(0,6).forEach(function(w){
+    var li = document.createElement('li');
+    li.innerHTML = ICO.check + '<span>' + w + '</span>';
+    list.appendChild(li);
+  });
+  if (!r.reasons.length) el('because').style.display = 'none';
+
+  /* De aanmeting-intro aanpassen aan wat ze aankruisten. */
+  if (r.tags.draagt){
+    el('fitIntro').innerHTML = 'Je gaf aan dat je regelmatig iets in je oor draagt. Dat is precies de groep ' +
+      'waarbij smeer zich sneller ophoopt, en waarbij een dop die niet goed sluit het probleem in stand ' +
+      'houdt. Een afdruk kan alleen goed als de gehoorgang schoon is, dus vlak na een behandeling is ' +
+      'letterlijk het beste moment om je oordoppen op maat te laten aanmeten.';
+  } else if (r.tags.water){
+    el('fitIntro').innerHTML = 'Je zwemt of doucht veel, en water in je gehoorgang is een van de vaste ' +
+      'aanleidingen voor een prop. Doppen op maat houden dat water eruit. Een afdruk kan alleen goed als ' +
+      'de gehoorgang schoon is, dus vlak na een behandeling is het beste moment om ze te laten aanmeten.';
+  } else if (r.tags.terugkerend){
+    el('fitIntro').innerHTML = 'Omdat het bij jou terugkomt is de aanmeting extra de moeite waard: je ' +
+      'gehoorgang wordt uitgemeten en je hoort meteen wat de ophoping in jouw geval in stand houdt. Een ' +
+      'afdruk kan alleen goed als de gehoorgang schoon is, dus vlak na een behandeling is het beste moment.';
+  }
+
+  dl({ event:'quiz_complete', quiz_name:'audinc_oorcheck', quiz_score:r.pts, quiz_outcome:level });
+
+  progress(Q.length);
+  show('s-result');
+  el('sticky').classList.add('on');
+}
+
+/* Wizard openen met de juiste dienst. openAudincBookingFor komt uit booking.js
+   en wordt door route.js op elke audinc-pagina ingeladen. */
+function openFor(serviceId, paid, what){
+  dl({ event:'quiz_cta_click', quiz_name:'audinc_oorcheck', cta:what });
+  if (typeof window.openAudincBookingFor === 'function'){
+    window.openAudincBookingFor(serviceId, paid);
+  } else if (typeof window.openModal === 'function'){
+    window.openModal();
+  } else {
+    window.location.href = 'https://afspraak.audinc.nl';
+  }
+}
+
+el('start').addEventListener('click', function(){
+  if (!started){ started = true; dl({ event:'quiz_start', quiz_name:'audinc_oorcheck' }); }
+  idx = 0; renderQ(); show('s-q');
+});
+el('next').addEventListener('click', next);
+el('back').addEventListener('click', back);
+el('book-treat').addEventListener('click', function(){ openFor(SERVICE_TREATMENT, true, 'behandeling'); });
+el('sticky-book').addEventListener('click', function(){ openFor(SERVICE_TREATMENT, true, 'sticky'); });
+el('book-fit').addEventListener('click', function(){ openFor(SERVICE_FITTING, false, 'gratis_aanmeting'); });
+el('again').addEventListener('click', function(){
+  idx = 0; answers = Q.map(function(){return [];});
+  el('because').style.display = '';
+  el('sticky').classList.remove('on');
+  progress(0); show('s-intro');
+});
+})();
+</script>
+<script src="/audinc/booking.js" defer></script>
+<script src="/audinc/lp-consent.js" defer></script>
+</body>
+</html>

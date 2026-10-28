@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Consent Mode v2 + GTM-KVKKTQK, zelfde volgorde als BaseLayout.astro -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+    });
+    gtag('set', 'url_passthrough', true);
+    try {
+        var lees = function (n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : null; };
+        var keuze = null, eigen = lees('audinc_consent');
+        if (eigen) { var c = JSON.parse(eigen); if (c && c.v === 1) keuze = c; }
+        if (!keuze) {
+            var cy = lees('cookieyes-consent');
+            if (cy) {
+                var v = {};
+                cy.split(',').forEach(function (d) { var kv = d.split(':'); v[(kv[0] || '').trim()] = (kv[1] || '').trim(); });
+                if (v.action === 'yes') keuze = { analytics: v.analytics === 'yes', marketing: v.advertisement === 'yes' };
+            }
+        }
+        if (keuze) {
+            var ads = keuze.marketing ? 'granted' : 'denied';
+            gtag('consent', 'update', { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: keuze.analytics ? 'granted' : 'denied' });
+        }
+    } catch (e) {}
+    </script>
+    <script>
+    // GTM alleen op de echte domeinen. Op een preview of lokaal alleen met
+    // ?gtm_debug (Tag Assistant) of ?lp_gtm=1, anders telt een testboeking als
+    // echte conversie in Google Ads.
+    (function (w, d, s, l, i) {
+        var h = location.hostname.replace(/^www\./, '');
+        var echt = /^audinc\.(nl|be|eu|de|cy|lt)$/.test(h);
+        if (!echt && !/[?&](gtm_debug|lp_gtm)=/.test(location.search)) return;
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KVKKTQK');
+    </script>
+
+    <meta name="robots" content="noindex, nofollow">
+    <title>5 redenen waarom je oor verstopt blijft zitten | Audinc</title>
+    <meta name="description" content="Een dof, verstopt oor dat na druppelen en spoelen steeds terugkomt. Vijf redenen waarom oorsmeer blijft zitten, en wat er wel werkt bij hard, ingedroogd smeer.">
+    <link rel="icon" href="/audinc/gedeeld/favicon.ico" type="image/x-icon">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #f26722;
+            --orange-dark: #d4551a;
+            --orange-light: #fff3ec;
+            --green: #10bf0c;
+            --green-dark: #0ea00b;
+            --dark: #1a1a2e;
+            --text: #333;
+            --text-light: #666;
+            --bg-light: #fff;
+            --line: #ececec;
+            --serif: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            --white: #fff;
+            --radius: 12px;
+            --shadow: 0 2px 16px rgba(0,0,0,.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.65;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 84px;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* ============ TOPBAR (geen navigatie, bewust) ============ */
+        .adv-topbar {
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 14px 0;
+        }
+        .adv-topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .adv-topbar img { height: 30px; width: auto; }
+        /* ============ DEEL A: HET ARTIKEL ============ */
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 32px 24px 8px;
+        }
+
+        /* Hero boven de kop, zoals bij VitalPaws: eerst het beeld, dan de belofte. */
+        .art-hero {
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .art-hero img { width: 100%; max-height: 360px; object-fit: cover; }
+        @media (max-width: 640px) { .art-hero img { max-height: 240px; } }
+
+        /* Kop, kicker, deck en byline staan gecentreerd. De lopende tekst
+           daaronder blijft links uitgelijnd, anders leest de kolom niet. */
+        .art-head { text-align: center; margin-bottom: 40px; }
+        .art-kicker {
+            display: inline-block;
+            background: var(--orange-light);
+            color: var(--orange-dark);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+        .article h1 {
+            font-family: var(--serif);
+            font-size: clamp(32px, 5.6vw, 52px);
+            line-height: 1.14;
+            font-weight: 400;
+            color: #000;
+            letter-spacing: -.6px;
+            margin-bottom: 18px;
+        }
+        .art-deck {
+            font-size: 19px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 26px;
+        }
+        .byline {
+            display: inline-block;
+            padding: 14px 0 0;
+            border-top: 1px solid var(--line);
+            margin-bottom: 34px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .reason { margin-bottom: 44px; }
+        .reason img { border-radius: var(--radius); margin-bottom: 20px; }
+        /* Staand beeld mag de kolom niet vullen, anders duwt het de tekst weg. */
+        .reason .portrait { max-width: min(400px, 100%); margin-left: auto; margin-right: auto; }
+        .reason figure { margin: 22px 0 0; }
+        .reason figure img { margin-bottom: 8px; margin-left: auto; margin-right: auto; }
+        .reason figcaption {
+            font-size: 13.5px;
+            color: var(--text-light);
+            text-align: center;
+        }
+        .reason h2 {
+            font-family: var(--serif);
+            font-size: clamp(23px, 3.7vw, 31px);
+            line-height: 1.22;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 12px;
+            letter-spacing: -.4px;
+        }
+        .reason h2 span { color: var(--orange); }
+        .reason p { margin-bottom: 14px; font-size: 17px; }
+        .reason p:last-child { margin-bottom: 0; }
+        .reason strong { color: var(--dark); font-weight: 600; }
+
+        .pull {
+            border-left: 3px solid var(--orange);
+            background: var(--orange-light);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 16px;
+            margin: 18px 0;
+        }
+
+        .inline-cta {
+            display: block;
+            text-align: center;
+            margin: 34px 0;
+        }
+        .inline-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green-dark);
+            font-weight: 700;
+            font-size: 17px;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(16,191,12,.35);
+            padding-bottom: 3px;
+        }
+        .inline-cta a:hover { border-bottom-color: var(--green); }
+
+        /* ============ MARQUEE ============ */
+        .marquee {
+            background: var(--dark);
+            color: #fff;
+            overflow: hidden;
+            padding: 14px 0;
+            margin-top: 20px;
+        }
+        .marquee-track {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            animation: scrollx 34s linear infinite;
+        }
+        .marquee-track span {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: .9;
+        }
+        .marquee-track span::before { content: '\2713'; color: var(--green); margin-right: 8px; font-weight: 700; }
+        @keyframes scrollx { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+        /* ============ DEEL B: HET BOEKINGSBLOK ============ */
+        .offer { background: #fff; padding: 48px 0 56px; }
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+        @media (min-width: 900px) {
+            .offer-grid { grid-template-columns: 1fr 1fr; gap: 44px; }
+            .offer-media { position: sticky; top: 24px; }
+        }
+
+        .gallery-main { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #fff; }
+        .gallery-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+        .gallery-thumbs button {
+            padding: 0; border: 2px solid transparent; background: none; cursor: pointer;
+            border-radius: 8px; overflow: hidden; line-height: 0;
+        }
+        .gallery-thumbs button.active { border-color: var(--orange); }
+        /* De vier beelden hebben verschillende verhoudingen. Vast kader plus
+           contain, anders springt de sticky kolom bij elke thumbnailwissel. */
+        .gallery-main img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #fff; }
+        .gallery-thumbs button img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
+
+        .offer-eyebrow { font-size: 13px; font-weight: 700; color: var(--orange-dark); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+        .offer h2 { font-size: clamp(25px, 4.2vw, 33px); line-height: 1.22; color: var(--dark); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+        .offer-rating { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-light); margin-bottom: 14px; }
+        .offer-rating a { color: var(--text-light); text-decoration: underline; }
+        .stars { color: #f5a623; letter-spacing: 1px; }
+        .offer-lead { font-size: 17px; margin-bottom: 20px; }
+
+        .spec-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 22px; }
+        .spec {
+            background: #fff; border: 1px solid #eee; border-radius: 10px;
+            padding: 12px 14px; font-size: 14px; font-weight: 500; color: var(--dark);
+        }
+        .spec small { display: block; font-weight: 400; color: var(--text-light); font-size: 12.5px; }
+
+        .statcard {
+            background: #fff; border: 1px solid #e4f3e3; border-left: 4px solid var(--green);
+            border-radius: 10px; padding: 16px 18px; margin-bottom: 22px;
+        }
+        .statcard b { font-size: 17px; color: var(--dark); }
+        .statcard small { display: block; color: var(--text-light); font-size: 12.5px; margin-top: 6px; }
+
+        .price-card {
+            background: #fff; border: 2px solid var(--green); border-radius: var(--radius);
+            padding: 20px; margin-bottom: 16px;
+        }
+        .price-card h3 { font-size: 18px; color: var(--dark); margin-bottom: 6px; }
+        .price-incl { list-style: none; margin: 12px 0 0; }
+        .price-incl li { font-size: 15px; padding-left: 26px; position: relative; margin-bottom: 7px; }
+        .price-incl li::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: inherit; font-weight: 700; border: none; border-radius: 10px;
+            cursor: pointer; text-decoration: none; transition: all .2s; white-space: nowrap;
+        }
+        .btn-primary { background: var(--green); color: var(--white); padding: 16px 32px; font-size: 17px; width: 100%; }
+        .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(16,191,12,.3); }
+        .guarantee { text-align: center; font-size: 13.5px; color: var(--text-light); margin-top: 10px; }
+        .guarantee b { color: var(--dark); }
+
+        .availability { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 16px 18px; margin-top: 18px; }
+        .availability h4 { font-size: 14px; color: var(--dark); margin-bottom: 10px; }
+        .availability ul { list-style: none; font-size: 14px; }
+        .availability li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #eee; }
+        .availability li:last-child { border-bottom: none; }
+        .availability .tag { font-weight: 600; font-size: 12.5px; }
+        .tag-free { color: var(--green-dark); }
+        .tag-busy { color: var(--orange-dark); }
+
+        /* ============ ACCORDION ============ */
+        .acc { margin-top: 24px; border-top: 1px solid #e6e6e6; }
+        .acc-item { border-bottom: 1px solid #e6e6e6; }
+        .acc-q {
+            width: 100%; background: none; border: none; cursor: pointer; font-family: inherit;
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            padding: 16px 0; text-align: left; font-size: 16px; font-weight: 600; color: var(--dark);
+        }
+        .acc-q::after { content: '+'; font-size: 22px; color: var(--orange); flex-shrink: 0; line-height: 1; }
+        .acc-item.open .acc-q::after { content: '\2013'; }
+        .acc-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+        .acc-a > div { padding: 0 0 16px; font-size: 15.5px; color: var(--text-light); }
+        .acc-a table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+        .acc-a td { padding: 8px 0; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+        .acc-a td:first-child { font-weight: 600; color: var(--dark); width: 34%; }
+
+        /* ============ REVIEWS ============ */
+        .reviews { padding: 52px 0; background: #fff; border-top: 1px solid var(--line); }
+        .sec-head { text-align: center; max-width: 620px; margin: 0 auto 32px; }
+        .sec-head h2 { font-size: clamp(24px, 4vw, 32px); color: var(--dark); font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+        .sec-head p { color: var(--text-light); }
+        .review-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 820px) { .review-grid { grid-template-columns: repeat(3, 1fr); } }
+        .reviews-proof {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 15px; color: var(--text-light); margin-bottom: 8px;
+        }
+        .reviews-proof strong { color: var(--dark); font-size: 17px; }
+        .g-logo { width: 20px; height: 20px; }
+        .verified-check { width: 14px; height: 14px; color: var(--green); vertical-align: -2px; }
+        .review-meta { font-size: 12.5px; color: var(--text-light); margin-top: 4px; }
+        .review { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+        .review p { font-size: 15.5px; margin: 8px 0 12px; }
+        .review-name { font-size: 13.5px; color: var(--dark); font-weight: 600; }
+
+        /* ============ FAQ ============ */
+        .faq-sec { padding: 52px 0 60px; background: #fff; border-top: 1px solid var(--line); }
+        .faq-wrap { max-width: 760px; margin: 0 auto; }
+
+        /* ============ STICKY BAR ============ */
+        .sticky {
+            position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+            background: #fff; border-top: 1px solid rgba(26,26,46,.12);
+            box-shadow: 0 -4px 18px rgba(0,0,0,.08);
+            transform: translateY(100%); opacity: 0; visibility: hidden;
+            transition: transform .45s ease, opacity .35s ease;
+        }
+        .sticky.active { transform: translateY(0); opacity: 1; visibility: visible; }
+        .sticky .container { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 12px; padding-bottom: 12px; }
+        .sticky-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+        .sticky-info img { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+        .sticky-info b { display: block; font-size: 15px; color: var(--dark); line-height: 1.25; }
+        .sticky-info span { font-size: 12.5px; color: var(--text-light); }
+        .sticky .btn-primary { width: auto; padding: 13px 26px; font-size: 15.5px; }
+        @media (max-width: 560px) {
+            .sticky-info img { display: none; }
+            .sticky-info b { font-size: 14px; }
+            .sticky .btn-primary { padding: 12px 18px; font-size: 14.5px; }
+            .sticky .container { padding-left: 16px; padding-right: 16px; }
+        }
+
+        /* ============ FOOTER ============ */
+        .footer { background: var(--dark); color: rgba(255,255,255,.75); padding: 40px 0 28px; font-size: 14px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 720px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+        .footer h4 { color: #fff; font-size: 15px; margin-bottom: 10px; }
+        .footer a { color: rgba(255,255,255,.75); text-decoration: none; }
+        .footer a:hover { color: var(--orange); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 6px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 26px; padding-top: 18px; font-size: 12.5px; opacity: .7; }
+        .footer address { font-style: normal; }
+    </style>
+    <link rel="stylesheet" href="/audinc/booking.css">
+    <script>window.AUDINC_BOOKING={"defaultServiceId":14,"paid":true,"prepayNote":"Je rekent nu €25 onderzoekskosten online af, met iDEAL, creditcard of Apple Pay. Het uitzuigen kost €27,50 per behandeld oor en betaal je op locatie. Wordt er geen oorsmeer gevonden, dan betaal je alleen de onderzoekskosten. Kosteloos annuleren of verzetten kan tot 24 uur vooraf.","title":null,"backend":"audinc-site"};</script>
+</head>
+<body>
+
+<!-- ============================================================
+     TOPBAR. Bewust zonder navigatiemenu: elke link naar elders is
+     een ontsnappingsroute. Alleen het logo, als masthead.
+     ============================================================ -->
+<div class="adv-topbar">
+    <div class="container">
+        <img src="/audinc/gedeeld/logo-dark.svg" alt="Audinc">
+    </div>
+</div>
+
+<!-- ============================================================
+     DEEL A: HET ARTIKEL
+     ============================================================ -->
+<article class="article" id="top">
+
+    <div class="art-hero">
+        <picture>
+            <source media="(min-width: 960px)" srcset="/audinc/oren-zitten-vol/symptoom-verstopt-oor-1280.webp">
+            <source media="(min-width: 640px)" srcset="/audinc/oren-zitten-vol/symptoom-verstopt-oor-960.webp">
+            <img src="/audinc/oren-zitten-vol/symptoom-verstopt-oor-640.webp" alt="Man houdt zijn hand achter zijn oor omdat hij gedempt hoort" width="1280" height="862" loading="eager" fetchpriority="high">
+        </picture>
+    </div>
+
+    <div class="art-head">
+        <span class="art-kicker">Oorsmeer &amp; gehoor</span>
+
+        <h1>5 redenen waarom je oor verstopt blijft zitten</h1>
+
+        <p class="art-deck">Bijna iedereen begint met druppels en een spuitje uit de drogist. Bij hard, ingedroogd oorsmeer is dat precies de verkeerde volgorde, en dat is de reden dat het doffe gevoel steeds terugkomt.</p>
+
+        <div class="byline">19 augustus 2026 &middot; leestijd 4 minuten</div>
+    </div>
+
+    <!-- ── 1 ─────────────────────────────────────────────── -->
+    <div class="reason">
+        <picture>
+            <source media="(min-width: 640px)" srcset="/audinc/oren-zitten-vol/gehoorgang-close-up-960.webp">
+            <img src="/audinc/gedeeld/gehoorgang-close-up-640.webp" alt="Close-up van een oor: de gehoorgang voert oorsmeer normaal gesproken zelf af" width="960" height="536" loading="lazy">
+        </picture>
+        <h2>1. Oorsmeer hoort er te zijn, tot het niet meer weg kan</h2>
+        <p>Je gehoorgang maakt zichzelf schoon. De huid in je gehoorgang groeit langzaam naar buiten en neemt het oorsmeer mee, als een lopende band. Bij de meeste mensen merk je daar je hele leven niets van.</p>
+        <p>Die lopende band hapert zodra de gehoorgang smal of bochtig is, zodra je veel in het oor zit, of zodra je dagelijks iets in je oor draagt. <strong>In-ears, hoortoestellen, oordoppen en een helm remmen de afvoer allemaal af.</strong> Het smeer blijft dan liggen, droogt in en wordt hard.</p>
+        <p>Vanaf dat moment gaat het niet meer vanzelf weg. En dat is precies waar de meeste mensen de eerste verkeerde stap zetten.</p>
+    </div>
+
+    <!-- ── 2 ─────────────────────────────────────────────── -->
+    <div class="reason">
+        <picture>
+            <source media="(min-width: 640px)" srcset="/audinc/oren-zitten-vol/wattenstaafje-960.webp">
+            <img src="/audinc/oren-zitten-vol/wattenstaafje-640.webp" alt="Vrouw maakt haar oor schoon met een wattenstaafje en trekt een pijnlijk gezicht" width="960" height="640" loading="lazy">
+        </picture>
+        <h2>2. Een wattenstaafje duwt het aan tot een prop</h2>
+        <p>Een wattenstaafje haalt het losse smeer aan de buitenkant weg. Dat zie je op het staafje en dat voelt alsof het werkt. Wat je niet ziet is dat het overgrote deel dieper de gehoorgang in geduwd wordt, tegen het trommelvlies aan.</p>
+        <p>Daar is de gehoorgang nauwer en is er geen lopende band meer die het terugbrengt. Het smeer wordt daar aangedrukt tot een compacte prop.</p>
+        <div class="pull">Dit verklaart waarom het gevoel vaak <strong>na</strong> het schoonmaken erger wordt in plaats van beter. Je hebt het niet weggehaald, je hebt het verplaatst.</div>
+        <p>Dezelfde beweging maak je trouwens met een oordopje dat je er 's ochtends indrukt, met een oorbelletje van een bril, of met de punt van een handdoek na het douchen.</p>
+    </div>
+
+    <div class="inline-cta">
+        <a href="#naar-de-oplossing">Naar de oplossing &rarr;</a>
+    </div>
+
+    <!-- ── 3 ─────────────────────────────────────────────── -->
+    <div class="reason">
+        <img class="portrait" src="/audinc/oren-zitten-vol/gedempt-gehoor-640.webp" alt="Vrouw met een hand tegen haar hoofd, gedempt gehoor aan een kant" width="595" height="640" loading="lazy">
+        <h2>3. Spoelen werkt alleen als het smeer <span>al zacht</span> is</h2>
+        <p>Uitspuiten is water onder druk. Dat water moet langs de prop komen, erachter terechtkomen en hem er van binnenuit uitduwen. Bij zacht, vers smeer lukt dat prima.</p>
+        <p>Bij een harde, ingedroogde prop lukt het niet. Het water komt er niet langs, of het komt er wel langs en de prop zit muurvast. Dat is de reden dat je vooraf een week moet druppelen: <strong>de druppels moeten het smeer eerst week maken, anders heeft spoelen geen zin.</strong></p>
+        <p>Werkt het druppelen niet goed genoeg, dan mislukt de spoeling en volgt er een tweede afspraak. Nog een week druppelen, nog een keer spoelen. Zo ben je zo drie weken verder terwijl je nog steeds slecht hoort.</p>
+    </div>
+
+    <!-- ── 4 ─────────────────────────────────────────────── -->
+    <div class="reason">
+        <h2>4. Er wordt gespoeld zonder dat iemand meekijkt</h2>
+        <p>Bij spoelen kijkt de behandelaar vooraf in je oor en daarna weer. Tijdens het spoelen zelf kijkt niemand mee, want je gehoorgang zit vol water. Er wordt dus gewerkt op gevoel en op wat eruit komt drijven.</p>
+        <p>Daardoor blijft er regelmatig een restje zitten tegen het trommelvlies, precies op de plek die je gehoor dempt. En water dat achterblijft in een warme gehoorgang geeft dat volle, borrelende gevoel dat dagen kan aanhouden.</p>
+        <p>Er zijn ook oren waarbij spoelen simpelweg niet mag: bij trommelvliesbuisjes, bij een perforatie, na een trommelvliesplastiek of na een operatie aan het middenoor. Water hoort daar niet te komen.</p>
+    </div>
+
+    <div class="inline-cta">
+        <a href="#naar-de-oplossing">Naar de oplossing &rarr;</a>
+    </div>
+
+    <!-- ── 5: pas hier komt het merk binnen ──────────────── -->
+    <div class="reason">
+        <picture>
+            <source media="(min-width: 640px)" srcset="/audinc/gedeeld/microsuctie-960.webp">
+            <img src="/audinc/gedeeld/microsuctie-640.webp" alt="Specialist van Audinc zuigt oorsmeer droog weg onder een 3D-microscoop" width="960" height="536" loading="lazy">
+        </picture>
+        <h2>5. Wat wel werkt: droog weghalen, met zicht op het oor</h2>
+        <p>De methode die deze vier problemen in één keer oplost heet microsuctie, of gewoon uitzuigen. Er komt geen water aan te pas. De specialist kijkt door een 3D-microscoop mee in je gehoorgang en zuigt het smeer er met een dun zuigbuisje uit, stukje voor stukje.</p>
+        <p>Omdat het droog gaat, hoeft het smeer niet eerst week te zijn. <strong>Geen druppelweek vooraf, ook niet bij harde proppen.</strong> Omdat er zicht is op het trommelvlies, blijft er niets achter en zie je meteen of het oor helemaal vrij is. En het mag ook bij buisjes en bij een perforatie, waar spoelen niet mag.</p>
+        <p>Audinc doet dit op elf vestigingen in Nederland. Je hebt er geen verwijzing voor nodig, je boekt zelf een tijd, en in de meeste gevallen ben je in één afspraak van twintig tot dertig minuten klaar.</p>
+
+        <figure>
+            <img src="/audinc/oren-zitten-vol/voor-na-otoscoop-545.webp" alt="Dezelfde gehoorgang voor en na het uitzuigen, gefotografeerd door de otoscoop" width="545" height="252" loading="lazy">
+            <figcaption>Links de gehoorgang bij binnenkomst, rechts dezelfde gehoorgang na de behandeling. Het trommelvlies is weer vrij.</figcaption>
+        </figure>
+    </div>
+
+</article>
+
+<!-- ============ TRUST MARQUEE, precies op de naad ============ -->
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Zicht op het trommelvlies</span>
+        <span>Geen druppelweek vooraf</span>
+        <span>Geen verwijzing nodig</span>
+        <span>12 vestigingen in Nederland</span>
+        <span>Ook bij hard oorsmeer</span>
+        <span>Klaar in 20 tot 30 minuten</span>
+        <span>Zicht op het trommelvlies</span>
+        <span>Geen druppelweek vooraf</span>
+        <span>Geen verwijzing nodig</span>
+        <span>12 vestigingen in Nederland</span>
+        <span>Ook bij hard oorsmeer</span>
+        <span>Klaar in 20 tot 30 minuten</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     DEEL B: HET BOEKINGSBLOK (het "productpagina"-deel)
+     De naad. Elke CTA in het artikel scrollt hierheen.
+     ============================================================ -->
+<section class="offer" id="naar-de-oplossing">
+    <div class="container">
+        <div class="offer-grid">
+
+            <!-- ── Gallery ────────────────────────────────── -->
+            <div class="offer-media">
+                <div class="gallery-main">
+                    <img id="galMain" src="/audinc/gedeeld/microsuctie-960.webp" alt="Oorsmeer uitzuigen onder de 3D-microscoop bij Audinc" width="960" height="536" loading="lazy">
+                </div>
+                <div class="gallery-thumbs" id="galThumbs">
+                    <button type="button" class="active" data-src="/audinc/gedeeld/microsuctie-960.webp" aria-label="Uitzuigen onder de microscoop"><img src="/audinc/oren-zitten-vol/microsuctie-320.webp" alt="Uitzuigen onder de microscoop" width="320" height="178" loading="lazy"></button>
+                    <button type="button" data-src="/audinc/gedeeld/inspectie-960.webp" aria-label="Inspectie van de gehoorgang"><img src="/audinc/oren-zitten-vol/inspectie-320.webp" alt="Inspectie van de gehoorgang" width="320" height="178" loading="lazy"></button>
+                    <button type="button" data-src="/audinc/gedeeld/behandelkamer-960.webp" aria-label="In de behandelkamer"><img src="/audinc/oren-zitten-vol/behandelkamer-320.webp" alt="In de behandelkamer" width="320" height="200" loading="lazy"></button>
+                    <button type="button" data-src="/audinc/oren-zitten-vol/voor-na-otoscoop-545.webp" aria-label="Voor en na de behandeling"><img src="/audinc/oren-zitten-vol/voor-na-otoscoop-545.webp" alt="Voor en na de behandeling" width="545" height="252" loading="lazy"></button>
+                </div>
+            </div>
+
+            <!-- ── Aanbod ─────────────────────────────────── -->
+            <div class="offer-body">
+                <div class="offer-eyebrow">De oplossing</div>
+                <h2>Oorsmeer uitzuigen bij een verstopt oor</h2>
+
+                <div class="offer-rating">
+                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <a href="#reviews">4,7/5 uit 317 reviews</a>
+                </div>
+
+                <p class="offer-lead">Droge microsuctie onder een 3D-microscoop. Geen water, geen druppelweek vooraf, en zicht op het trommelvlies zodat er niets blijft zitten. In de meeste gevallen hoor je het verschil voordat je de stoel uit bent.</p>
+
+                <div class="spec-row">
+                    <div class="spec">20 tot 30 minuten<small>meestal één afspraak</small></div>
+                    <div class="spec">Beide oren<small>in dezelfde afspraak</small></div>
+                    <div class="spec">Geen verwijzing<small>je boekt zelf</small></div>
+                    <div class="spec">12 vestigingen<small>door heel Nederland</small></div>
+                </div>
+
+                <div class="statcard">
+                    <b>Ook bij hard, ingedroogd oorsmeer</b>
+                    <small>Omdat er droog gewerkt wordt hoeft het smeer niet eerst week te zijn. Uitzuigen mag ook bij trommelvliesbuisjes en bij een perforatie, waar spoelen niet is toegestaan.</small>
+                </div>
+
+                <div class="price-card">
+                    <h3>Wat je krijgt</h3>
+                    <ul class="price-incl">
+                        <li>Onderzoek van beide gehoorgangen onder de microscoop</li>
+                        <li>Het oorsmeer droog verwijderd, geen water</li>
+                        <li>Direct zicht of het oor helemaal vrij is</li>
+                        <li>Advies om te voorkomen dat het terugkomt</li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-primary" onclick="advCta('offer_primary')">Plan een afspraak voor uitzuigen</button>
+                <p class="guarantee">Je ziet direct <b>welke tijden vrij zijn</b> bij jou in de buurt, en de prijs per vestiging staat erbij.</p>
+
+                <div class="availability">
+                    <h4>Waar je terecht kunt</h4>
+                    <ul>
+                        <li><span>Amsterdam (Rokin en Sloterdijk)</span><span class="tag tag-free">2 locaties</span></li>
+                        <li><span>Utrecht, Den Haag, Rotterdam</span><span class="tag tag-free">Randstad</span></li>
+                        <li><span>Eindhoven, Nijmegen, Apeldoorn, Zwolle</span><span class="tag tag-free">Midden en oost</span></li>
+                        <li><span>Groningen en Maastricht</span><span class="tag tag-busy">Noord en zuid</span></li>
+                    </ul>
+                </div>
+
+                <!-- ── Accordions met de saaie feiten ──────── -->
+                <div class="acc">
+                    <div class="acc-item">
+                        <button class="acc-q" type="button" onclick="toggleAcc(this)">Hoe de afspraak verloopt</button>
+                        <div class="acc-a"><div>
+                            <table>
+                                <tr><td>Stap 1</td><td>De specialist kijkt met een microscoop in beide gehoorgangen en laat zien wat er zit.</td></tr>
+                                <tr><td>Stap 2</td><td>Het oorsmeer wordt met een dun zuigbuisje weggehaald, stukje voor stukje, zonder water.</td></tr>
+                                <tr><td>Stap 3</td><td>Controle van het trommelvlies om te zien of de gehoorgang helemaal vrij is.</td></tr>
+                                <tr><td>Stap 4</td><td>Advies over wat het bij jou veroorzaakt en hoe je het volgende keer voor bent.</td></tr>
+                            </table>
+                        </div></div>
+                    </div>
+                    <div class="acc-item">
+                        <button class="acc-q" type="button" onclick="toggleAcc(this)">Wanneer je beter naar de huisarts gaat</button>
+                        <div class="acc-a"><div>
+                            Bij oorpijn, koorts, vocht dat uit je oor loopt, plotseling gehoorverlies of duizeligheid hoort er eerst een arts naar te kijken. Dat zijn geen klachten van een prop oorsmeer. Ook als je gehoor na het verwijderen niet terugkomt, is dat een reden om je huisarts te bellen.
+                        </div></div>
+                    </div>
+                    <div class="acc-item">
+                        <button class="acc-q" type="button" onclick="toggleAcc(this)">Waarom uitzuigen en niet uitspuiten</button>
+                        <div class="acc-a"><div>
+                            Uitspuiten werkt met water en vraagt daarom dat het smeer eerst week is, meestal na een week druppelen. Bij harde proppen is een tweede spoeling geen uitzondering. Uitzuigen gaat droog, dus dat voorwerk vervalt, en de specialist houdt tijdens de behandeling zicht op de gehoorgang.
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     REVIEWS
+     ============================================================ -->
+<section class="reviews" id="reviews">
+    <div class="container">
+        <div class="sec-head">
+            <h2>Wat klanten zeggen</h2>
+            <div class="reviews-proof">
+                <svg class="g-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <strong>4,7</strong>
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span>uit 64 Google-reviews</span>
+            </div>
+            <p>Op basis van 317 reviews.</p>
+        </div>
+        <div class="review-grid">
+            <div class="review">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <p>&ldquo;Geen wachttijd, vriendelijk geholpen en mijn gehoor was meteen beter. Fijn dat dit gewoon buiten het ziekenhuis kan, scheelt enorm veel tijd. Ik kom zeker terug als het nodig is.&rdquo;</p>
+                <div class="review-name">Anja <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="review-meta">21 november 2025 &middot; Beoordeling van Oren uitzuigen</div>
+            </div>
+            <div class="review">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <p>&ldquo;Professioneel en duidelijk. De specialist liet eerst een video van mijn oor zien en daarna het resultaat. Echt bizar hoeveel verschil het maakt. Je merkt meteen dat ze met moderne apparatuur werken.&rdquo;</p>
+                <div class="review-name">Tom <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="review-meta">21 november 2025 &middot; Beoordeling van Oren uitzuigen</div>
+            </div>
+            <div class="review">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <p>&ldquo;Super service! Ik had al weken last van een verstopt oor en werd bij Audinc binnen 30 minuten geholpen. De behandeling was volledig pijnloos en ik hoorde direct weer scherp. Absoluut een aanrader!&rdquo;</p>
+                <div class="review-name">Marieke <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="review-meta">21 november 2025 &middot; Beoordeling van Oren uitzuigen</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="faq-sec" id="faq">
+    <div class="container">
+        <div class="sec-head"><h2>Veelgestelde vragen</h2></div>
+        <div class="faq-wrap acc">
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Moet ik vooraf druppelen?</button>
+                <div class="acc-a"><div>Nee. Omdat er droog gezogen wordt hoeft het oorsmeer niet eerst week gemaakt te worden. Heb je al gedruppeld, dan is dat ook geen probleem.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Doet het pijn?</button>
+                <div class="acc-a"><div>Nee. Je hoort het zuigbuisje, dat ruist. Er wordt niets in je oor geduwd en er komt geen water aan te pas. De meeste mensen vinden het vooral een raar geluid, geen vervelend gevoel.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Mag het met trommelvliesbuisjes of een perforatie?</button>
+                <div class="acc-a"><div>Ja, en dat is juist het verschil met spoelen. Water hoort niet achter een buisje of door een perforatie te komen, daarom mag uitspuiten dan niet. Droog uitzuigen kan wel. Meld het bij het maken van de afspraak, dan houdt de specialist er rekening mee.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Ben ik er in één afspraak vanaf?</button>
+                <div class="acc-a"><div>In de meeste gevallen wel. Omdat er zicht is op de gehoorgang ziet de specialist tijdens de behandeling of alles weg is, in plaats van achteraf te moeten afwachten.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Heb ik een verwijzing van mijn huisarts nodig?</button>
+                <div class="acc-a"><div>Nee, je boekt zelf online een tijd. Bij oorpijn, koorts, vocht uit het oor of plotseling gehoorverlies stuur je eerst langs je huisarts, want dat past niet bij een prop oorsmeer.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Waarom komt het bij mij steeds terug?</button>
+                <div class="acc-a"><div>Meestal door de vorm van de gehoorgang of doordat er dagelijks iets in zit: in-ears, een hoortoestel, oordoppen of een helm. Die remmen de natuurlijke afvoer af. De specialist kijkt bij de afspraak wat er bij jou speelt en geeft advies om de tussenpozen langer te maken.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Kan ik voor beide oren tegelijk komen?</button>
+                <div class="acc-a"><div>Ja, beide oren worden in dezelfde afspraak bekeken en behandeld.</div></div>
+            </div>
+            <div class="acc-item">
+                <button class="acc-q" type="button" onclick="toggleAcc(this)">Wat kost het?</button>
+                <div class="acc-a"><div>De prijs staat bij het kiezen van je vestiging en tijd, voordat je iets bevestigt. Er komen geen kosten bij achteraf.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ STICKY BOEKINGSBALK ============ -->
+<div class="sticky" id="stickyBar">
+    <div class="container">
+        <div class="sticky-info">
+            <img src="/audinc/oren-zitten-vol/microsuctie-320.webp" alt="" width="320" height="178" loading="lazy">
+            <div>
+                <b>Oorsmeer uitzuigen</b>
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span>4,7/5 &middot; 12 vestigingen</span>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="advCta('sticky')">Plan afspraak</button>
+<p class="prijs-noot" style="max-width:620px;margin:14px auto 0;font-size:14px;line-height:1.55;color:#64748b;">Je rekent &euro;25 onderzoekskosten online af bij het boeken. Het uitzuigen kost &euro;27,50 per behandeld oor en betaal je op locatie. Wordt er geen oorsmeer gevonden, dan betaal je alleen de onderzoekskosten.</p>
+    </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Adres</h4>
+                <address>
+                    Audinc<br>
+                    Hastelweg 260 D<br>
+                    5652CN Eindhoven<br>
+                    Nederland
+                </address>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>
+                    <a href="mailto:info@audinc.nl">info@audinc.nl</a><br>
+                    <a href="tel:0850600012">085-0600012</a><br>
+                    <span style="opacity:.7;">Ma t/m vr 09:00 &ndash; 17:00</span>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Klantenservice</h4>
+                <ul class="footer-links">
+                    <li><a href="https://audinc.nl/contact/">Contact</a></li>
+                    <li><a href="https://audinc.nl/support/">Support</a></li>
+                    <li><a href="https://audinc.nl/levertijd/">Levertijden</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Dit artikel is geschreven en betaald door Audinc, specialist in oorzorg en gehoorbescherming op maat. Het vervangt geen medisch advies.</p>
+            <p>&copy; 2026 Audinc. Alle rechten voorbehouden.</p>
+        </div>
+    </div>
+<p class="lp-legal" style="margin:16px 0 0;font-size:13px;opacity:.75;text-align:center"><a href="https://audinc.nl/privacyverklaring/" style="color:inherit">Privacyverklaring</a> &middot; <a href="#" data-consent-open style="color:inherit">Cookievoorkeuren</a></p>
+</footer>
+
+<script>
+// ============ TRACKING: Capture URL params ============
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const trackingKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const tracked = {};
+    trackingKeys.forEach(function(key) {
+        const val = params.get(key);
+        if (val) {
+            tracked[key] = val;
+            try { sessionStorage.setItem(key, val); } catch(e) {}
+        } else {
+            try {
+                const stored = sessionStorage.getItem(key);
+                if (stored) tracked[key] = stored;
+            } catch(e) {}
+        }
+    });
+    window.__lpTracking = tracked;
+})();
+
+// ============ CTA: opent de boekingswizard + dataLayer ============
+function advCta(placement) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'advertorial_cta_click', cta_placement: placement, advertorial: 'oren-zitten-vol' });
+    if (typeof window.openModal === 'function') window.openModal();
+}
+
+// ============ ACCORDION ============
+function toggleAcc(btn) {
+    var item = btn.parentElement;
+    var answer = item.querySelector('.acc-a');
+    var isOpen = item.classList.contains('open');
+    var scope = item.closest('.acc');
+    scope.querySelectorAll('.acc-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.acc-a').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+}
+
+// ============ GALLERY ============
+(function() {
+    var main = document.getElementById('galMain');
+    var thumbs = document.getElementById('galThumbs');
+    if (!main || !thumbs) return;
+    thumbs.querySelectorAll('button').forEach(function(b) {
+        b.addEventListener('click', function() {
+            main.src = this.getAttribute('data-src');
+            thumbs.querySelectorAll('button').forEach(function(x) { x.classList.remove('active'); });
+            this.classList.add('active');
+        });
+    });
+})();
+
+// ============ ANKERSCROLL + meting van de naad ============
+// De server injecteert <base href="/audinc/<page>/">, dus relatieve URL's
+// resolven daartegen. Voor anchors dus preventDefault + handmatig scrollen,
+// en de hash op het HUIDIGE pad zetten zodat /oren-zitten-vol blijft staan.
+(function() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var hash = this.getAttribute('href');
+            if (!hash || hash === '#') return;
+            var target = document.getElementById(hash.slice(1));
+            if (!target) return;
+            e.preventDefault();
+            if (hash === '#naar-de-oplossing') {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: 'advertorial_cta_click', cta_placement: 'in_article', advertorial: 'oren-zitten-vol' });
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (history.replaceState) {
+                history.replaceState(null, '', window.location.pathname + hash);
+            }
+        });
+    });
+})();
+
+// ============ STICKY BALK + offer_view event ============
+(function() {
+    var bar = document.getElementById('stickyBar');
+    var offer = document.getElementById('naar-de-oplossing');
+    if (!bar || !offer) return;
+
+    // Balk verschijnt zodra het artikel voorbij de eerste vouw is.
+    window.addEventListener('scroll', function() {
+        bar.classList.toggle('active', window.scrollY > 600);
+    }, { passive: true });
+
+    // Eén keer meten dat het boekingsblok echt in beeld is geweest.
+    if ('IntersectionObserver' in window) {
+        var seen = false;
+        new IntersectionObserver(function(entries) {
+            entries.forEach(function(en) {
+                if (en.isIntersecting && !seen) {
+                    seen = true;
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({ event: 'advertorial_offer_view', advertorial: 'oren-zitten-vol' });
+                }
+            });
+        }, { threshold: 0.25 }).observe(offer);
+    }
+})();
+</script>
+
+<script src="/audinc/booking.js" defer></script>
+<script src="/audinc/lp-consent.js" defer></script>
+</body>
+</html>

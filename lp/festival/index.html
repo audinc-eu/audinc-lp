@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Consent Mode v2 + GTM-KVKKTQK, zelfde volgorde als BaseLayout.astro -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+    });
+    gtag('set', 'url_passthrough', true);
+    try {
+        var lees = function (n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : null; };
+        var keuze = null, eigen = lees('audinc_consent');
+        if (eigen) { var c = JSON.parse(eigen); if (c && c.v === 1) keuze = c; }
+        if (!keuze) {
+            var cy = lees('cookieyes-consent');
+            if (cy) {
+                var v = {};
+                cy.split(',').forEach(function (d) { var kv = d.split(':'); v[(kv[0] || '').trim()] = (kv[1] || '').trim(); });
+                if (v.action === 'yes') keuze = { analytics: v.analytics === 'yes', marketing: v.advertisement === 'yes' };
+            }
+        }
+        if (keuze) {
+            var ads = keuze.marketing ? 'granted' : 'denied';
+            gtag('consent', 'update', { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: keuze.analytics ? 'granted' : 'denied' });
+        }
+    } catch (e) {}
+    </script>
+    <script>
+    // GTM alleen op de echte domeinen. Op een preview of lokaal alleen met
+    // ?gtm_debug (Tag Assistant) of ?lp_gtm=1, anders telt een testboeking als
+    // echte conversie in Google Ads.
+    (function (w, d, s, l, i) {
+        var h = location.hostname.replace(/^www\./, '');
+        var echt = /^audinc\.(nl|be|eu|de|cy|lt)$/.test(h);
+        if (!echt && !/[?&](gtm_debug|lp_gtm)=/.test(location.search)) return;
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KVKKTQK');
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Festival Oordoppen op Maat | Gratis Aanmeting | Audinc</title>
+    <meta name="description" content="Festival oordoppen op maat: geniet van muziek zonder gehoorschade. Vlakke demping, perfecte pasvorm. Gratis aanmeting van 20 min. 4,7/5 uit 317 reviews.">
+    <link rel="icon" href="/audinc/gedeeld/favicon.ico" type="image/x-icon">
+
+
+
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #f26722;
+            --orange-dark: #d4551a;
+            --orange-light: #fff3ec;
+            --green: #10bf0c;
+            --green-dark: #0ea00b;
+            --dark: #1a1a2e;
+            --text: #333;
+            --text-light: #666;
+            --bg-light: #f8f8f8;
+            --white: #fff;
+            --radius: 12px;
+            --shadow: 0 2px 16px rgba(0,0,0,.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============ NAV ============ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--dark);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            padding: 12px 0;
+            transition: box-shadow .3s;
+        }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+        .nav-logo span {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -.5px;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-phone {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,.8);
+            text-decoration: none;
+        }
+        .nav-phone:hover { color: var(--orange); }
+
+        /* ============ BUTTONS ============ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+            padding: 14px 32px;
+            font-size: 17px;
+        }
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16,191,12,.3);
+        }
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+        .btn-nav {
+            background: var(--green);
+            color: var(--white);
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+        .btn-nav:hover {
+            background: var(--green-dark);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #fff 0%, var(--orange-light) 100%);
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--white);
+            border: 1px solid rgba(242,103,34,.15);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        .hero h1 .mark {
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            color: var(--dark);
+        }
+        .hero h1 .mark::after {
+            content: '';
+            position: absolute;
+            left: -4%;
+            right: -4%;
+            bottom: -10px;
+            height: 14px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M4,9 Q30,3 60,7 Q100,12 140,5 Q170,2 196,8' stroke='%23F26722' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .hero-subhead {
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--text);
+            margin-bottom: 28px;
+            max-width: 520px;
+        }
+        .hero-ticks {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 24px;
+            margin: 16px 0 0;
+            padding: 0;
+        }
+        .hero-ticks li {
+            font-size: 14px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hero-ticks li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            background: var(--green);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-size: 11px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .hero-bullets li {
+            font-size: 16px;
+            color: var(--text);
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .hero-bullets li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            background: var(--green);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-size: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .hero-review {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .hero-stars { color: #f5a623; font-size: 16px; }
+        .hero-google-logo { width: 16px; height: 16px; vertical-align: middle; }
+
+        /* Hero Right - Visual Card */
+        .hero-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,.06);
+        }
+        .hero-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        .hero-card-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+        }
+        .hero-card-step:last-child { border-bottom: none; }
+        .hero-card-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .hero-card-step h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+        .hero-card-step p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+
+        /* Hero Right - Product */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 420px;
+            background: radial-gradient(circle at 50% 50%, var(--orange-light) 0%, transparent 70%);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .hero-visual img {
+            width: 100%;
+            height: 100%;
+            max-height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ============ TRUST BAR ============ */
+        .trust-bar {
+            background: var(--dark);
+            padding: 20px 0;
+        }
+        .trust-bar .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .trust-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* ============ SECTIONS ============ */
+        section { padding: 72px 0; }
+        section.alt { background: var(--bg-light); }
+
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--orange);
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 640px;
+            line-height: 1.6;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        /* ============ PROBLEM ============ */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .problem-card {
+            padding: 28px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(0,0,0,.08);
+        }
+        .problem-card.bad {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        .problem-card.good {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .problem-card.bad h3 { color: #dc2626; }
+        .problem-card.good h3 { color: #16a34a; }
+        .problem-card ul {
+            list-style: none;
+        }
+        .problem-card li {
+            padding: 6px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .problem-card li span { flex-shrink: 0; }
+
+        /* ============ USPs ============ */
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .usp-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,.04);
+            transition: transform .2s;
+        }
+        .usp-card:hover { transform: translateY(-2px); }
+        .usp-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+            background: var(--orange-light);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .usp-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .usp-card p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* ============ HOW IT WORKS ============ */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: calc(16.67% + 16px);
+            right: calc(16.67% + 16px);
+            height: 2px;
+            background: linear-gradient(90deg, var(--orange), var(--green));
+            z-index: 0;
+        }
+        .step-card {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .step-num {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            background: var(--white);
+            border: 3px solid var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--orange);
+        }
+        .step-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .step-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.5;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+        /* ============ TESTIMONIALS ============ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            position: relative;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,.04);
+        }
+        .testimonial-card .source-corner {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 22px;
+            height: 22px;
+        }
+        .testimonial-stars {
+            color: #f5a623;
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-right: 32px;
+        }
+        .testimonial-card blockquote {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .testimonial-author .verified-check {
+            width: 14px;
+            height: 14px;
+            color: #1a73e8;
+            flex-shrink: 0;
+        }
+        .testimonial-meta {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .reviews-header-proof {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 8px 14px;
+            background: var(--white);
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,.06);
+            font-size: 14px;
+            color: var(--text);
+        }
+        .reviews-header-proof svg.g-logo { width: 18px; height: 18px; }
+        .reviews-header-proof .rh-stars { color: #f5a623; letter-spacing: 1px; }
+        .reviews-header-proof strong { font-weight: 600; color: var(--dark); }
+        .reviews-header-subtext {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        /* ============ FITTING ============ */
+        .fitting-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .fitting-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: block;
+        }
+        .fitting-copy .section-label { margin-bottom: 12px; }
+        .fitting-copy .section-title { text-align: left; margin-bottom: 24px; }
+        .fitting-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            counter-reset: fitting;
+        }
+        .fitting-list li {
+            position: relative;
+            padding: 0 0 20px 48px;
+            counter-increment: fitting;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+        .fitting-list li::before {
+            content: counter(fitting);
+            position: absolute;
+            left: 0;
+            top: -2px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fitting-list li strong {
+            display: block;
+            font-size: 16px;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        .fitting-list li:last-child { padding-bottom: 0; }
+        @media (max-width: 720px) {
+            .fitting-grid { grid-template-columns: 1fr; gap: 24px; }
+        }
+
+        /* ============ ABOUT ============ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .about-photo {
+            display: flex;
+            justify-content: center;
+        }
+        .about-photo img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: block;
+        }
+        .about-copy .section-label { margin-bottom: 12px; }
+        .about-copy .section-title { text-align: left; margin-bottom: 16px; }
+        .about-copy p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        .about-copy p:last-child { margin-bottom: 0; font-style: italic; color: var(--text-light); }
+        @media (max-width: 720px) {
+            .about-grid { grid-template-columns: 1fr; gap: 24px; }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ============ FAQ ============ */
+        .faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid rgba(0,0,0,.08);
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .faq-question:hover { color: var(--orange); }
+        .faq-chevron {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            transition: transform .3s;
+        }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 0 20px;
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ============ CLOSING CTA ============ */
+        .closing {
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+            padding: 72px 0;
+            text-align: center;
+        }
+        .closing .section-title { color: var(--white); }
+        .closing .section-subtitle {
+            color: rgba(255,255,255,.7);
+            margin: 0 auto 32px;
+        }
+        .closing .hero-review { color: rgba(255,255,255,.6); }
+
+        /* ============ CTA BAR (herhaald) ============ */
+        .cta-row {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .cta-row .hero-review { display: flex; justify-content: center; }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(255,255,255,.08);
+            padding: 24px 0;
+            text-align: center;
+        }
+        .footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,.4);
+        }
+        .footer a {
+            color: rgba(255,255,255,.5);
+            text-decoration: none;
+        }
+        .footer a:hover { color: rgba(255,255,255,.7); }
+
+        /* ============ MODAL ============ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,.6);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.visible { opacity: 1; }
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            width: 92vw;
+            max-width: 860px;
+            height: 88vh;
+            max-height: 750px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform .3s;
+            box-shadow: 0 20px 60px rgba(0,0,0,.3);
+        }
+        .modal-overlay.visible .modal { transform: translateY(0); }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(0,0,0,.08);
+            flex-shrink: 0;
+        }
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .modal-header span {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--text-light);
+            transition: color .2s;
+        }
+        .modal-close:hover { color: var(--dark); }
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0;
+        }
+        .modal-body .embedded-booking {
+            min-width: 100%;
+            min-height: 550px;
+        }
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .embed-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: var(--text-light);
+            font-size: 13px;
+            gap: 8px;
+        }
+        .embed-loading.hidden { display: none; }
+        .modal-trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 12px 24px;
+            border-top: 1px solid rgba(0,0,0,.08);
+            flex-shrink: 0;
+            background: var(--bg-light);
+        }
+        .modal-trust span {
+            font-size: 12px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 768px) {
+            .hero { padding: 100px 0 48px; }
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .hero h1 { font-size: 28px; }
+            .hero-card { display: none; }
+
+            .hero-visual { order: -1; min-height: 200px; margin: 0 auto; max-width: 320px; border-radius: 12px; }
+            .hero-visual img { max-height: 220px; }
+            .trust-bar .container {
+                gap: 16px 24px;
+                justify-content: center;
+            }
+            .trust-item { font-size: 12px; }
+
+            section { padding: 48px 0; }
+            .section-title { font-size: 24px; }
+            .section-subtitle { font-size: 15px; }
+
+            .problem-grid { grid-template-columns: 1fr; gap: 16px; }
+
+            .usp-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .usp-card { padding: 20px 16px; }
+
+            .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+            .steps-grid::before { display: none; }
+
+            .testimonials-grid { grid-template-columns: 1fr; }
+
+            .nav-phone { display: none; }
+
+            .modal {
+                width: 100vw;
+                height: 100vh;
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .usp-grid { grid-template-columns: 1fr; }
+            .trust-bar .container { gap: 12px 20px; }
+        }
+
+    
+        /* ============ NAV MENU (added) ============ */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-menu a {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,.85);
+            text-decoration: none;
+            transition: color .2s;
+            padding: 6px 0;
+        }
+        .nav-menu a:hover { color: var(--orange); }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--white);
+        }
+        .nav-toggle svg { width: 24px; height: 24px; }
+        section[id] { scroll-margin-top: 72px; }
+
+        /* ============ FOOTER (added) ============ */
+        .footer {
+            background: var(--bg-light, #f8f8f8);
+            border-top: 1px solid rgba(0,0,0,.06);
+            padding: 36px 0 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 28px;
+        }
+        .footer-col h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        .footer-col p,
+        .footer-col address {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-style: normal;
+            margin: 0;
+        }
+        .footer-col a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .footer-col a:hover { color: var(--orange); }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li { padding: 4px 0; }
+        .footer-links a { font-size: 14px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(0,0,0,.08);
+            padding: 16px 0;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ============ NAV/FOOTER mobile (added) ============ */
+        @media (max-width: 900px) {
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--dark);
+                padding: 16px 24px 24px;
+                gap: 0;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+                box-shadow: 0 8px 24px rgba(0,0,0,.3);
+                transform: translateY(-110%);
+                visibility: hidden;
+                transition: transform .3s ease, visibility 0s linear .3s;
+                z-index: 99;
+            }
+            .nav-menu.open { transform: translateY(0); visibility: visible; transition: transform .3s ease, visibility 0s linear 0s; }
+            .nav-menu li { width: 100%; }
+            .nav-menu a {
+                display: block;
+                padding: 12px 0;
+                font-size: 16px;
+                border-bottom: 1px solid rgba(255,255,255,.06);
+            }
+            .nav-menu li:last-child a { border-bottom: none; }
+            .nav-toggle { display: block; }
+        }
+        @media (max-width: 720px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+        /* safe-area-fix */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            body { padding-top: env(safe-area-inset-top); }
+            .nav { padding-top: calc(12px + env(safe-area-inset-top)); }
+            .footer-bottom { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+            @media (max-width: 900px) {
+                .nav-menu { top: calc(60px + env(safe-area-inset-top)); }
+            }
+        }
+</style>
+    <link rel="stylesheet" href="/audinc/booking.css">
+    <script>window.AUDINC_BOOKING={"defaultServiceId":4,"paid":false,"prepayNote":null,"title":null,"backend":"audinc-site"};</script>
+</head>
+<body>
+
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+    <div class="container">
+        <a href="#top" class="nav-logo">
+            <img src="/audinc/gedeeld/logo-white.svg" alt="Audinc" style="height:36px;">
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#voordelen">Voordelen</a></li>
+            <li><a href="#aanmeting">Aanmeting</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#over-ons">Over ons</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="btn btn-nav" onclick="openModal()">Plan aanmeting</button>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" id="navToggleIcon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+    <div class="container">
+        <div class="hero-content">
+            <h1><span class="mark">Festivaloordoppen</span> op maat waarmee de muziek helder blijft</h1>
+            <p class="hero-subhead">In 20 minuten persoonlijk aangemeten. Klinkt het te dof of zitten ze niet lekker tijdens het dansen? Dan passen we ze kosteloos aan, tot ze &eacute;cht goed zitten.</p>
+            <button class="btn btn-primary" onclick="openModal()">Plan je gratis aanmeting</button>
+            <ul class="hero-ticks">
+                <li>Gratis &amp; vrijblijvend</li>
+                <li>Bevestiging per email</li>
+            </ul>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+        <div class="hero-visual">
+            <picture>
+                <source media="(min-width: 960px)" srcset="/audinc/gedeeld/hero-festival-1280.webp">
+                <source media="(min-width: 640px)" srcset="/audinc/gedeeld/hero-festival-960.webp">
+                <img src="/audinc/gedeeld/hero-festival-640.webp" alt="Bezoeker geniet van festival met Audinc gehoorbescherming op maat" width="1280" height="853" loading="eager" fetchpriority="high">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust-bar">
+    <div class="container">
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            95.000+ klanten
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            4,7/5 uit 317 reviews
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            19 locaties in NL &amp; BE
+        </div>
+        <div class="trust-item">
+            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            2 jaar garantie
+        </div>
+    </div>
+</div>
+
+
+<!-- ============ PROBLEM ============ -->
+<section>
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Het probleem</div>
+            <h2 class="section-title">Standaard oordoppen verpesten je festivalervaring</h2>
+            <p class="section-subtitle">Schuimoordoppen dempen alles plat. De bas verdwijnt, stemmen klinken blikkerig. Dat is niet genieten, dat is overleven. Festival oordoppen op maat lossen dit op.</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card bad">
+                <h3><span>&#10007;</span> Schuim- of standaard oordoppen</h3>
+                <ul>
+                    <li><span>&#10007;</span> Muziek klinkt gedempt en blikkerig</li>
+                    <li><span>&#10007;</span> Vallen eruit bij dansen en bewegen</li>
+                    <li><span>&#10007;</span> Knellen na een uur, de hele avond door</li>
+                    <li><span>&#10007;</span> Gesprekken met vrienden onmogelijk</li>
+                    <li><span>&#10007;</span> De volgende ochtend toch een piep in je oren</li>
+                </ul>
+            </div>
+            <div class="problem-card good">
+                <h3><span>&#10003;</span> Festival oordoppen op maat</h3>
+                <ul>
+                    <li><span>&#10003;</span> Muziek klinkt vol en helder, alleen zachter</li>
+                    <li><span>&#10003;</span> Blijven zitten, ook bij dansen en headbangen</li>
+                    <li><span>&#10003;</span> Urenlang comfortabel dragen zonder drukpunten</li>
+                    <li><span>&#10003;</span> Gesprekken voeren zonder oordoppen uit te doen</li>
+                    <li><span>&#10003;</span> Bescherm je gehoor zonder iets te missen</li>
+                </ul>
+            </div>
+        </div>
+        <div class="cta-row">
+            <button class="btn btn-primary" onclick="openModal()">Plan je gratis aanmeting</button>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ USPs ============ -->
+<section class="alt" id="voordelen">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Waarom Audinc</div>
+            <h2 class="section-title">De specialist in festival gehoorbescherming</h2>
+        </div>
+        <div class="usp-grid">
+            <div class="usp-card">
+                <div class="usp-icon">&#128274;</div>
+                <h3>100% op maat</h3>
+                <p>Afdruk van jouw gehoorgang voor een perfecte pasvorm. Geen compromis.</p>
+            </div>
+            <div class="usp-card">
+                <div class="usp-icon">&#9989;</div>
+                <h3>Comfort&shy;garantie</h3>
+                <p>Past het niet perfect? Kosteloos aanpassen tot je 100% tevreden bent.</p>
+            </div>
+            <div class="usp-card">
+                <div class="usp-icon">&#128260;</div>
+                <h3>3 maanden gratis filterwissel</h3>
+                <p>De eerste 3 maanden wisselen en controleren we je filters gratis, in de winkel of per post.</p>
+            </div>
+            <div class="usp-card">
+                <div class="usp-icon">&#128176;</div>
+                <h3>All-in prijs</h3>
+                <p>Advies, aanmeting, product en etui inbegrepen. Geen verborgen kosten.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="aanmeting">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Hoe het werkt</div>
+            <h2 class="section-title">In 3 stappen naar jouw perfecte festival oordoppen</h2>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <h3>Plan een afspraak</h3>
+                <p>Kies een locatie en tijdstip dat jou uitkomt. Volledig vrijblijvend en gratis.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <h3>Aanmeting (20 min)</h3>
+                <p>Onze specialist controleert je oren en maakt een nauwkeurige afdruk van je gehoorgang.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <h3>Ontvang je oordoppen</h3>
+                <p>Ons lab maakt jouw oordoppen op maat. Binnen 2-3 weken thuis, met spoed 5 werkdagen plus verzendtijd.</p>
+            </div>
+        </div>
+        <div class="cta-row">
+            <button class="btn btn-primary" onclick="openModal()">Plan je gratis aanmeting</button>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FITTING ============ -->
+<section class="alt" id="fitting">
+    <div class="container">
+        <div class="fitting-grid">
+            <div class="fitting-photo">
+                <picture>
+                    <source media="(min-width: 960px)" srcset="/audinc/gedeeld/oordoppen-aanmeten-1280.webp">
+                    <source media="(min-width: 640px)" srcset="/audinc/gedeeld/oordoppen-aanmeten-960.webp">
+                    <img src="/audinc/gedeeld/oordoppen-aanmeten-640.webp" alt="Audinc specialist maakt een persoonlijke oorafdruk" loading="lazy" width="640" height="427">
+                </picture>
+            </div>
+            <div class="fitting-copy">
+                <div class="section-label">De aanmeting</div>
+                <h2 class="section-title">Wat gebeurt er precies?</h2>
+                <ol class="fitting-list">
+                    <li><strong>Cameracheck.</strong> We bekijken je oorgang met een endoscopische camera om de vorm te beoordelen.</li>
+                    <li><strong>Afdruk maken.</strong> Zacht siliconen materiaal vult je gehoorgang en hardt in een paar minuten uit.</li>
+                    <li><strong>Voorzichtig verwijderen.</strong> De specialist haalt de afdruk uit en controleert of hij compleet is.</li>
+                    <li><strong>Na 20 minuten weer buiten.</strong> Geen prikken, geen naalden. Veilig en comfortabel.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="cta-row" style="margin-top: 40px;">
+            <button class="btn btn-primary" onclick="openModal()">Plan je gratis aanmeting</button>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="reviews">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Reviews</div>
+            <h2 class="section-title">Wat klanten zeggen</h2>
+            <div class="reviews-header-proof">
+                <svg class="g-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <strong>4,7</strong>
+                <span class="rh-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span>uit 64</span>
+            </div>
+            <div class="reviews-header-subtext">Op basis van 317 reviews</div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <svg class="source-corner" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Ik heb hier een tweede set oordopjes besteld, zo tevreden ben ik over de kwaliteit en service van deze firma. De set slaap oordopjes zitten geweldig en zorgen niet voor pijn in je oren tijdens het slapen.&rdquo;</blockquote>
+                <div class="testimonial-author">Marc de Nijs <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">1 dag geleden &middot; Google</div>
+            </div>
+            <div class="testimonial-card">
+                <svg class="source-corner" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Zeer tevreden! Geen last meer van mijn oren na festivals.&rdquo;</blockquote>
+                <div class="testimonial-author">Daan Kuipers <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">3 weken geleden &middot; Google</div>
+            </div>
+            <div class="testimonial-card">
+                <svg class="source-corner" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Gebruik ze tijdens het motorrijden. Windruis is enorm verminderd en ik blijf alles goed horen.&rdquo;</blockquote>
+                <div class="testimonial-author">Kevin Bakker <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">1 maand geleden &middot; Google</div>
+            </div>
+        </div>
+        <div class="testimonials-grid" style="margin-top: 24px;">
+            <div class="testimonial-card">
+                <svg class="source-corner" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Als muzikant echt een must. Geluid blijft helder, geen doffe klank zoals bij standaard doppen.&rdquo;</blockquote>
+                <div class="testimonial-author">Aurelia Silva <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">3 weken geleden &middot; Google</div>
+            </div>
+            <div class="testimonial-card">
+                <svg class="source-corner" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Werkt perfect op de schietbaan. Alleen prijs is wat hoger, maar wel waard.&rdquo;</blockquote>
+                <div class="testimonial-author">Bas Hendriks <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">3 weken geleden &middot; Google</div>
+            </div>
+            <div class="testimonial-card">
+                <svg class="source-corner" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google review"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>&ldquo;Super tevreden met mijn op maat gemaakte oordoppen. Pasvorm is perfect en ik kan eindelijk weer zonder piep in mijn oren naar concerten.&rdquo;</blockquote>
+                <div class="testimonial-author">Cheryl Lugo <svg class="verified-check" viewBox="0 0 24 24" fill="currentColor" aria-label="Geverifieerd"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+                <div class="testimonial-meta">1 maand geleden &middot; Google</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="alt" id="over-ons">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-copy">
+                <div class="section-label">Over Audinc</div>
+                <h2 class="section-title">Gehoor verdient persoonlijke aandacht</h2>
+                <p>Audinc is d&eacute; specialist in op maat gemaakte gehoorbescherming.</p>
+                <p>Met 15+ jaar ervaring en 13 vestigingen in Nederland weten onze specialisten precies hoe een aanmeting hoort.</p>
+                <p>Rustig de tijd nemen. Geen vijfminutenafspraak. Geen universele doppen. Geen massaproductie.</p>
+                <p>Een goed gehoor is onbetaalbaar. Goede gehoorbescherming hoeft dat niet te zijn.</p>
+            </div>
+            <div class="about-photo">
+                <picture>
+                    <source media="(min-width: 960px)" srcset="/audinc/gedeeld/audinc-muur-mens-1280.webp">
+                    <source media="(min-width: 640px)" srcset="/audinc/gedeeld/audinc-muur-mens-960.webp">
+                    <img src="/audinc/gedeeld/audinc-muur-mens-640.webp" alt="Audinc specialist voor het bedrijfslogo" loading="lazy" width="640" height="720">
+                </picture>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Veelgestelde vragen</div>
+            <h2 class="section-title">Alles wat je wilt weten</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Wat kost een aanmeting?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">De aanmeting is volledig gratis en vrijblijvend. Je zit nergens aan vast. We nemen rustig de tijd om je gehoor en wensen in kaart te brengen. Pas als je besluit om verder te gaan, starten we het productieproces.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Wat kosten festival oordoppen op maat?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Festival oordoppen op maat starten vanaf &euro;128,95. De prijs hangt af van het dempingsniveau en eventuele extra wensen. Alle prijzen zijn all-in: advies, aanmeting, product en opbergetui inbegrepen. Geen verborgen kosten.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Moeten mijn oren schoon zijn?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Dat is niet nodig. We controleren altijd eerst je oren voordat we beginnen. Mocht er teveel oorsmeer zijn, dan verwijzen we je door of kunnen we het ter plekke reinigen. Probeer het niet zelf te doen.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Kan ik met festival oordoppen nog gewoon praten?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Ja, dankzij de vlakke demping blijven spraakfrequenties goed hoorbaar. Je kunt gewoon met je vrienden praten zonder je oordoppen uit te hoeven doen. Dat is het grote verschil met schuimoordoppen die alles dempen.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Waar kan ik terecht voor een aanmeting?
+                    <svg class="faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Audinc heeft 19 locaties in Nederland en Belgi&euml;. Onder andere in Amsterdam, Utrecht, Rotterdam, Eindhoven, Groningen, Den Haag, Breda, Apeldoorn, Zwolle, Maastricht en Nijmegen. Na het klikken op de knop zie je alle beschikbare locaties en tijden.</div>
+                </div>
+            </div>
+        </div>
+        <div class="cta-row">
+            <button class="btn btn-primary" onclick="openModal()">Plan je gratis aanmeting</button>
+            <div class="hero-review">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+                <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                4,7/5 op basis van 317 reviews
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="closing">
+    <div class="container">
+        <h2 class="section-title">Geniet van elk festival zonder gehoorschade</h2>
+        <p class="section-subtitle">Plan een gratis aanmeting van 20 minuten. Persoonlijk advies over de juiste demping voor festivals en concerten. Kies een locatie bij jou in de buurt.</p>
+        <button class="btn btn-primary" onclick="openModal()" style="font-size: 18px; padding: 16px 40px;">Plan je gratis aanmeting</button>
+        <div class="hero-review" style="margin-top: 16px;">
+                <svg class="hero-google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-label="Google reviews"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16.1 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4c-5.2 0-9.6-3.3-11.3-8L6.2 33C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.6l6.2 5.2c-.4.4 6.7-4.9 6.7-14.8c0-1.2-.1-2.4-.4-3.5z"/></svg>
+            <span class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            4,7/5 op basis van 317 reviews
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Adres</h4>
+                <address>
+                    Audinc<br>
+                    Hastelweg 260 D<br>
+                    5652CN Eindhoven<br>
+                    Nederland
+                </address>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>
+                    <a href="mailto:info@audinc.nl">info@audinc.nl</a><br>
+                    <a href="tel:0850600012">085-0600012</a><br>
+                    <span style="opacity:.7;">Ma t/m vr 09:00 &ndash; 17:00</span>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Klantenservice</h4>
+                <ul class="footer-links">
+                    <li><a href="https://audinc.nl/contact/">Contact</a></li>
+                    <li><a href="https://audinc.nl/support/">Support</a></li>
+                    <li><a href="https://audinc.nl/levertijd/">Levertijden</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Audinc &mdash; Oordoppen &amp; gehoorbescherming op maat. Alle rechten voorbehouden.</p>
+        </div>
+    </div>
+<p class="lp-legal" style="margin:16px 0 0;font-size:13px;opacity:.75;text-align:center"><a href="https://audinc.nl/privacyverklaring/" style="color:inherit">Privacyverklaring</a> &middot; <a href="#" data-consent-open style="color:inherit">Cookievoorkeuren</a></p>
+</footer>
+
+<script>
+// ============ TRACKING: Capture URL params ============
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const trackingKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const tracked = {};
+    trackingKeys.forEach(function(key) {
+        const val = params.get(key);
+        if (val) {
+            tracked[key] = val;
+            try { sessionStorage.setItem(key, val); } catch(e) {}
+        } else {
+            try {
+                const stored = sessionStorage.getItem(key);
+                if (stored) tracked[key] = stored;
+            } catch(e) {}
+        }
+    });
+    window.__lpTracking = tracked;
+})();
+
+// ============ NAV SCROLL ============
+window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// ============ FAQ TOGGLE ============
+function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var answer = item.querySelector('.faq-answer');
+    var isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+}
+
+
+// ============ MOBILE MENU TOGGLE (added) ============
+(function() {
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('navMenu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', function() {
+        var isOpen = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            menu.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
+
+// ============ HASH ANCHOR SCROLL (added) ============
+// Server injects <base href="/audinc/<page>/"> so relative URLs resolve against
+// that base. For in-page anchor clicks we preventDefault + manual scroll, then
+// write the hash onto the CURRENT path (window.location.pathname) so the clean
+// custom-domain path (e.g. /festival) is preserved instead of being reset to /.
+(function() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var hash = this.getAttribute('href');
+            if (!hash || hash === '#') return;
+            var target = document.getElementById(hash.slice(1));
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (history.replaceState) {
+                history.replaceState(null, '', window.location.pathname + hash);
+            }
+        });
+    });
+})();
+</script>
+
+<script src="/audinc/booking.js" defer></script>
+<script src="/audinc/lp-consent.js" defer></script>
+</body>
+</html>
