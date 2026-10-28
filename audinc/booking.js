@@ -183,7 +183,8 @@
       // Microsuctie (14) is verborgen voor het publieke Trafft-formulier en heeft
       // daarom een lege lijst. Die dienst is alleen in Nederland, dus dan de NL-vestigingen.
       if (Array.isArray(ids) && ids.length) locs = locs.filter(function (l) { return ids.indexOf(Number(l.id)) !== -1; });
-      else locs = locs.filter(function (l) { return l.country === 'netherlands'; });
+      // De advertentiepagina's zijn alleen voor Nederland: Belgische vestigingen nooit tonen.
+      locs = locs.filter(function (l) { return l.country === 'netherlands'; });
       return locs.map(function (l) { return { id: l.id, name: l.name, address: l.address, country: l.country }; });
     }
     if (path.indexOf('/slots') === 0) {
