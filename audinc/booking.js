@@ -183,6 +183,9 @@
       // Microsuctie (14) is verborgen voor het publieke Trafft-formulier en heeft
       // daarom een lege lijst. Die dienst is alleen in Nederland, dus dan de NL-vestigingen.
       if (Array.isArray(ids) && ids.length) locs = locs.filter(function (l) { return ids.indexOf(Number(l.id)) !== -1; });
+      // Zonder lijst vallen we terug op alle NL-vestigingen, maar Breda (id 5) doet
+      // geen oorreiniging. Gaat de bootstrap wel een lijst geven, dan wint die.
+      else if (Number(q.get('service')) === 14) locs = locs.filter(function (l) { return Number(l.id) !== 5 && !/breda/i.test(l.name || ''); });
       // De advertentiepagina's zijn alleen voor Nederland: Belgische vestigingen nooit tonen.
       locs = locs.filter(function (l) { return l.country === 'netherlands'; });
       return locs.map(function (l) { return { id: l.id, name: l.name, address: l.address, country: l.country }; });
@@ -655,6 +658,18 @@
             ts: Date.now(),
           }));
         } catch (e) { /* privémodus: liever geen meting dan een foute */ }
+        // En het slot zelf, net als stashBookingCheck in hun wizard: hun
+        // bedankpagina vraagt /api/trafft/verify-booking of Trafft de afspraak na
+        // de betaling echt heeft aangemaakt, en mailt anders een alarm.
+        try {
+          sessionStorage.setItem('audinc:booking-check', JSON.stringify({
+            service: state.service.id, location: state.location.id,
+            employee: Number(data && data.employee) || Number(state.slot && state.slot.e && state.slot.e[0]) || 0,
+            date: state.date, time: state.time,
+            firstName: firstName, lastName: lastName, email: String(email).trim(), phone: e164,
+            ts: Date.now(),
+          }));
+        } catch (e) { /* privémodus: dan slaat hun pagina de controle over */ }
         dl({ event: 'booking_payment_redirect', appointment_type: conversie.appointment_type, trafft_service_id: state.service.id });
         naMeting();
         return;
