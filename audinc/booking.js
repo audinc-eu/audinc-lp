@@ -292,7 +292,7 @@
 
   async function siteBook(p) {
     var t = tracking();
-    var attributie = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign']
+    var attributie = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
       .filter(function (k) { return t[k]; })
       .map(function (k) { return k + '=' + t[k]; }).join(' | ');
     var r = await fetch('/api/trafft/book', {

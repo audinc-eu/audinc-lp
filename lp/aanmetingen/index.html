@@ -1482,15 +1482,14 @@
 </footer>
 
 <script>
-// ============ TRACKING: Klik-ID's bewaren (gclid, gbraid, wbraid) ============
-// Drie plekken: first-party cookie (90 dagen), localStorage met vervaldatum
-// (90 dagen) en sessionStorage. Een nieuwe advertentieklik overschrijft alle
-// drie de klik-ID's tegelijk, zodat er nooit een oude gclid naast een nieuwe
-// gbraid blijft staan. Uitlezen: URL > localStorage > cookie > sessionStorage.
-// UTM's en overige klik-ID's (fbclid, msclkid) gelden alleen voor de sessie.
+// ============ TRACKING: Klik-ID's en UTM's bewaren ============
+// Alle campagneparameters (gclid, gbraid, wbraid, fbclid, msclkid, utm_*) op
+// drie plekken: first-party cookie (90 dagen), localStorage met vervaldatum
+// (90 dagen) en sessionStorage. Komt iemand binnen met nieuwe parameters, dan
+// overschrijft die set de oude volledig (laatste klik wint, nooit een oude
+// gclid naast nieuwe UTM's). Uitlezen: URL > localStorage > cookie > sessionStorage.
 (function() {
-    var KLIK = ['gclid', 'gbraid', 'wbraid'];
-    var SESSIE = ['fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    var SLEUTELS = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     var LS_KEY = 'audinc:klik';
     var COOKIE = 'audinc_klik';
     var DAGEN = 90;
@@ -1512,14 +1511,14 @@
     }
     function uitSessie() {
         var ids = {}, n = 0;
-        KLIK.forEach(function(k) {
+        SLEUTELS.forEach(function(k) {
             try { var v = sessionStorage.getItem(k); if (v) { ids[k] = v; n++; } } catch (e) {}
         });
         return n ? ids : null;
     }
 
     var nieuw = {}, heeftNieuw = false;
-    KLIK.forEach(function(k) {
+    SLEUTELS.forEach(function(k) {
         var v = params.get(k);
         if (v) { nieuw[k] = v.slice(0, 200); heeftNieuw = true; }
     });
@@ -1536,7 +1535,7 @@
                 '; Max-Age=' + (DAGEN * 86400) + '; Path=/; SameSite=Lax' + domein +
                 (location.protocol === 'https:' ? '; Secure' : '');
         } catch (e) {}
-        KLIK.forEach(function(k) {
+        SLEUTELS.forEach(function(k) {
             try { if (ids[k]) sessionStorage.setItem(k, ids[k]); else sessionStorage.removeItem(k); } catch (e) {}
         });
     } else {
@@ -1544,16 +1543,7 @@
     }
 
     var tracked = {};
-    KLIK.forEach(function(k) { if (ids[k]) tracked[k] = ids[k]; });
-    SESSIE.forEach(function(k) {
-        var v = params.get(k);
-        if (v) {
-            tracked[k] = v;
-            try { sessionStorage.setItem(k, v); } catch (e) {}
-        } else {
-            try { var s = sessionStorage.getItem(k); if (s) tracked[k] = s; } catch (e) {}
-        }
-    });
+    SLEUTELS.forEach(function(k) { if (ids[k]) tracked[k] = ids[k]; });
     window.__lpTracking = tracked;
 })();
 
@@ -1680,7 +1670,7 @@ function toggleFaq(btn) {
   if(document.body) add(); else document.addEventListener('DOMContentLoaded',add);
 })();
 </script>
-<script src="/audinc/booking.js?v=2ec6c716" defer></script>
+<script src="/audinc/booking.js?v=da7384a9" defer></script>
 <script src="/audinc/lp-consent.js?v=a7cd5086" defer></script>
 </body>
 </html>
