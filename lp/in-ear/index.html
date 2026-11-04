@@ -1747,21 +1747,76 @@
 </footer>
 
 <script>
-// ============ TRACKING: Capture URL params ============
+// ============ TRACKING: Klik-ID's bewaren (gclid, gbraid, wbraid) ============
+// Drie plekken: first-party cookie (90 dagen), localStorage met vervaldatum
+// (90 dagen) en sessionStorage. Een nieuwe advertentieklik overschrijft alle
+// drie de klik-ID's tegelijk, zodat er nooit een oude gclid naast een nieuwe
+// gbraid blijft staan. Uitlezen: URL > localStorage > cookie > sessionStorage.
+// UTM's en overige klik-ID's (fbclid, msclkid) gelden alleen voor de sessie.
 (function() {
-    const params = new URLSearchParams(window.location.search);
-    const trackingKeys = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-    const tracked = {};
-    trackingKeys.forEach(function(key) {
-        const val = params.get(key);
-        if (val) {
-            tracked[key] = val;
-            try { sessionStorage.setItem(key, val); } catch(e) {}
+    var KLIK = ['gclid', 'gbraid', 'wbraid'];
+    var SESSIE = ['fbclid', 'msclkid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    var LS_KEY = 'audinc:klik';
+    var COOKIE = 'audinc_klik';
+    var DAGEN = 90;
+    var params = new URLSearchParams(window.location.search);
+
+    function uitLocalStorage() {
+        try {
+            var v = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+            if (v && v.ids && v.exp > Date.now()) return v.ids;
+        } catch (e) {}
+        return null;
+    }
+    function uitCookie() {
+        try {
+            var m = document.cookie.match(/(?:^|; )audinc_klik=([^;]*)/);
+            if (m) return JSON.parse(decodeURIComponent(m[1]));
+        } catch (e) {}
+        return null;
+    }
+    function uitSessie() {
+        var ids = {}, n = 0;
+        KLIK.forEach(function(k) {
+            try { var v = sessionStorage.getItem(k); if (v) { ids[k] = v; n++; } } catch (e) {}
+        });
+        return n ? ids : null;
+    }
+
+    var nieuw = {}, heeftNieuw = false;
+    KLIK.forEach(function(k) {
+        var v = params.get(k);
+        if (v) { nieuw[k] = v.slice(0, 200); heeftNieuw = true; }
+    });
+
+    var ids;
+    if (heeftNieuw) {
+        ids = nieuw;
+        try {
+            localStorage.setItem(LS_KEY, JSON.stringify({ ids: ids, t: Date.now(), exp: Date.now() + DAGEN * 86400000 }));
+        } catch (e) {}
+        try {
+            var domein = /(^|\.)audinc\.nl$/.test(location.hostname) ? '; Domain=audinc.nl' : '';
+            document.cookie = COOKIE + '=' + encodeURIComponent(JSON.stringify(ids)) +
+                '; Max-Age=' + (DAGEN * 86400) + '; Path=/; SameSite=Lax' + domein +
+                (location.protocol === 'https:' ? '; Secure' : '');
+        } catch (e) {}
+        KLIK.forEach(function(k) {
+            try { if (ids[k]) sessionStorage.setItem(k, ids[k]); else sessionStorage.removeItem(k); } catch (e) {}
+        });
+    } else {
+        ids = uitLocalStorage() || uitCookie() || uitSessie() || {};
+    }
+
+    var tracked = {};
+    KLIK.forEach(function(k) { if (ids[k]) tracked[k] = ids[k]; });
+    SESSIE.forEach(function(k) {
+        var v = params.get(k);
+        if (v) {
+            tracked[k] = v;
+            try { sessionStorage.setItem(k, v); } catch (e) {}
         } else {
-            try {
-                const stored = sessionStorage.getItem(key);
-                if (stored) tracked[key] = stored;
-            } catch(e) {}
+            try { var s = sessionStorage.getItem(k); if (s) tracked[k] = s; } catch (e) {}
         }
     });
     window.__lpTracking = tracked;
