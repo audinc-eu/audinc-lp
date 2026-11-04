@@ -265,6 +265,31 @@
   // Boeken via hun book.js. Daarmee erven we hun no-show-blokkade, de verse
   // slotcontrole en de Belgische service-vertaling. Antwoord in onze vorm:
   // { bookingId } of { paymentUrl }, en bij een weigering een Error met reason.
+  // Herkomst in het formaat van de site (src/scripts/herkomst.ts): book.js zet
+  // gclid/gbraid/wbraid daaruit in de eigen velden in Trafft en telt het kanaal.
+  // sessie = deze LP met de bewaarde klik-ID's (90 dagen, zie het trackingblok
+  // in de pagina); eerste = het eerste bezoek zoals de site dat zelf bewaart.
+  function herkomst(t) {
+    var CAMP = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'gbraid', 'wbraid'];
+    var klikT = null;
+    try { var k = JSON.parse(localStorage.getItem('audinc:klik') || 'null'); if (k && k.t) klikT = new Date(k.t).toISOString(); } catch (e) {}
+    var ref = '';
+    try {
+      if (document.referrer) {
+        var h = new URL(document.referrer).hostname.replace(/^www\./, '');
+        if (!/(^|\.)audinc\.(nl|be|eu|de|cy|lt)$/.test(h)) ref = h.slice(0, 80);
+      }
+    } catch (e) {}
+    var sessie = { t: klikT || new Date().toISOString(), landing: location.pathname, ref: ref };
+    CAMP.forEach(function (k) { if (t[k]) sessie[k] = String(t[k]).slice(0, 200); });
+    var eerste = null;
+    try { eerste = JSON.parse(localStorage.getItem('audinc:herkomst:eerste') || 'null'); } catch (e) {}
+    return {
+      v: 1, eerste: eerste, sessie: sessie, paginas: [location.pathname], tools: [],
+      pagina: location.pathname, scherm: window.matchMedia && window.matchMedia('(max-width: 767px)').matches ? 'mobiel' : 'desktop',
+    };
+  }
+
   async function siteBook(p) {
     var t = tracking();
     var attributie = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign']
@@ -279,6 +304,7 @@
         firstName: p.firstName, lastName: p.lastName, email: p.email,
         phone: naarE164(p.phone, landcode(state.location)), message: p.note || '', productOptions: '',
         attribution: attributie, language: 'nl',
+        herkomst: herkomst(t),
       }),
     });
     var data = null; try { data = await r.json(); } catch (e) {}
