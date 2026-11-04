@@ -267,7 +267,7 @@
   // { bookingId } of { paymentUrl }, en bij een weigering een Error met reason.
   // Herkomst in het formaat van de site (src/scripts/herkomst.ts): book.js zet
   // gclid/gbraid/wbraid daaruit in de eigen velden in Trafft en telt het kanaal.
-  // sessie = deze LP met de bewaarde klik-ID's (90 dagen, zie het trackingblok
+  // sessie = deze LP met de bewaarde klik-ID's (30 dagen, zie het trackingblok
   // in de pagina); eerste = het eerste bezoek zoals de site dat zelf bewaart.
   function herkomst(t) {
     var CAMP = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'gbraid', 'wbraid'];
